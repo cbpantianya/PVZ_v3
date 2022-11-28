@@ -14,6 +14,7 @@ function loadAssets() {
         { src: "../assets/imgs/Plants/PeaShooter/PeaShooter.png", id: "PeaShooter" },
         { src: "../assets/imgs/Plants/PB1.gif", id: "PB1" },
         { src: "../assets/imgs/Zombies/Zombie/ZombieEat.png", id: "ZombieEat" },
+        { src: "../assets/imgs/SunBack.png", id: "SunBoard" },
     ]
     var loader = new createjs.LoadQueue()
     loader.loadManifest(manifest)

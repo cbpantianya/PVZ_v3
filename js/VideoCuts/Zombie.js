@@ -1,6 +1,6 @@
 class Zombie {
     constructor(x, y) {
-        this.blood = 100;
+        this.blood = 10;
         this.colunm = null;
         this.isMove = true;
         this.__init__(x, y)
@@ -26,7 +26,7 @@ class Zombie {
     }
 
     move() {
-        this.zombie.x -= 0.8
+        this.zombie.x -= 0.6
     }
 
     tick() {

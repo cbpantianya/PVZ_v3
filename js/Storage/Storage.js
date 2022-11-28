@@ -10,6 +10,7 @@ class GameData {
     __init__() {
         this.level = 1 // 当前关卡
         this.land = [] // 地图数据
+        this.sun = 100 // 当前阳光数
     }
 
     // 重置游戏数据
@@ -36,7 +37,6 @@ class GameData {
                         this.land[i].push(new LandUnit(j * 80, i * 80, 80, 80, 1, null))
                     }
                 }
-
             } else if (nums == 1) {
                 if (i == 0 || i == 1 || i == 3 || i == 4) {
                     for (let j = 0; j < 9; j++) {

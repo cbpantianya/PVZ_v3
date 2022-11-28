@@ -23,7 +23,7 @@ class PeaShooter {
         this.peaShooter.regX = 35
         this.peaShooter.regY = 35
         window.stage.getChildByName("gameContainer").addChild(this.peaShooter)
-        this.attackRange = 200
+        this.attackRange = 700
         this.waitAttack = 0
         // 血量监测
         this.peaShooter.addEventListener("tick", this.tick.bind(this))
@@ -38,7 +38,7 @@ class PeaShooter {
         }
     }
 
-    bloodJ(){
+    bloodJ() {
         if (this.waitBlood == 10) {
             this.waitBlood = 0
             this.blood -= 1
@@ -47,14 +47,14 @@ class PeaShooter {
     }
 
     tick() {
-        if(this.blood <= 0){
+        if (this.blood <= 0) {
             this.peaShooter.alpha = 0.5
             // 移除监听并销毁自己
             this.peaShooter.removeEventListener("tick", this.tick.bind(this))
             window.stage.getChildByName("gameContainer").removeChild(this.peaShooter)
             window.gameData.land.forEach(e => {
                 e.forEach(e => {
-                    if(e.plant == this){
+                    if (e.plant == this) {
                         e.plant = null
                     }
                 });
@@ -63,7 +63,7 @@ class PeaShooter {
             console.log("豌豆射手死了")
             // 告诉附近的僵尸可以移动了
             window.zombieList.forEach(e => {
-                if(Math.abs(e.zombie.x - this.peaShooter.x) < 200){
+                if (Math.abs(e.zombie.x - this.peaShooter.x) < 200) {
                     e.isMove = true
                     e.zombie.gotoAndPlay("walk")
                 }
@@ -76,6 +76,7 @@ class PeaShooter {
 class PeaShooterCard {
     constructor(x, y) {
         this.__plantInHand__ = false;
+        this.waitTime = 60
         this.__init__(x, y)
     }
 
@@ -84,12 +85,14 @@ class PeaShooterCard {
         var card = new createjs.Bitmap(window.loader.getResult("PeaShooterCard"))
         card.x = x
         card.y = y
+        card.name = "PeaShooterCard"
         window.stage.getChildByName("uiContainer").addChild(card)
 
         // 卡片点击事件
         card.addEventListener("click", this.click.bind(this))
 
         console.log(window.gameData.land)
+        this.card = card
     }
 
     click(e) {
@@ -178,6 +181,30 @@ class PeaShooterCard {
                 }
             }
         }
+
+        window.gameData.sun -= 100
+        window.stage.getChildByName("uiContainer").getChildByName("sunNumber").text = window.gameData.sun
+        // 禁用卡片
+        window.stage.getChildByName("uiContainer").getChildByName("PeaShooterCard").removeAllEventListeners()
+        window.stage.getChildByName("uiContainer").getChildByName("PeaShooterCard").alpha = 0.5
+        // 添加倒计时
+        var time = 10
+        var timeText = new createjs.Text(time, "20px Arial", "#000")
+        timeText.x = this.card.x + 40
+        timeText.y = this.card.y + 25
+        window.stage.getChildByName("uiContainer").addChild(timeText)
+        var timer = setInterval(function() {
+            time--
+            timeText.text = time
+            if (time == 0) {
+                clearInterval(timer)
+                window.stage.getChildByName("uiContainer").removeChild(timeText) 
+                if(window.gameData.sun >= 100){
+                    window.stage.getChildByName("uiContainer").getChildByName("PeaShooterCard").addEventListener('click', this.click.bind(this))
+                    window.stage.getChildByName("uiContainer").getChildByName("PeaShooterCard").alpha = 1
+                }
+            }}.bind(this),600)
+
     }
 }
 

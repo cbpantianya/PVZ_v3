@@ -1,6 +1,7 @@
 import { Zombie } from '../VideoCuts/Zombie.js'
 import { PeaShooterCard } from '../VideoCuts/PeaShooter.js'
 import { GameData } from "../Storage/Storage.js"
+import {SunBoard} from "../VideoCuts/Sun.js"
 
 class GameAll {
     constructor() {
@@ -46,6 +47,8 @@ class GameAll {
 
         // 添加Card
         var peaShooterCard = new PeaShooterCard(130, 0)
+        var sunBoard = new SunBoard(0, 0)
+        
 
 
 
