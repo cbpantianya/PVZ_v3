@@ -34,6 +34,25 @@ class Zombie {
             this.move()
         }
 
+        // 当僵尸移动到20像素的时候，游戏失败
+        if (this.zombie.x < 20) {
+            // 显示：僵尸吃掉了你的脑子
+            if (!window.stage.getChildByName("uiContainer").getChildByName("ZombieWon")) {
+                var ZombieWon = new createjs.Bitmap(window.loader.getResult("ZombieWon"))
+                ZombieWon.x = 0
+                ZombieWon.y = 0
+                ZombieWon.name = "ZombieWon"
+                window.stage.getChildByName("uiContainer").addChild(ZombieWon)
+                // 更新舞台
+                window.stage.update()
+                // 停止游戏
+                createjs.Ticker.paused = true
+                console.log("游戏失败")
+            }
+
+
+        }
+
         // 判断与植物的碰撞
         for (let i = 0; i < window.gameData.land.length; i++) {
             for (let j = 0; j < window.gameData.land[i].length; j++) {

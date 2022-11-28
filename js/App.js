@@ -1,5 +1,7 @@
 import { GameData } from "./Storage/Storage.js"
 import { GameStart } from "./GameStart/GameStart.js"
+import { GameChoose } from "./GameChoose/GameChoose.js"
+import { GameAll } from "./GameAll/GameAll.js"
 
 function loadAssets() {
     var manifest = [
@@ -15,6 +17,8 @@ function loadAssets() {
         { src: "../assets/imgs/Plants/PB1.gif", id: "PB1" },
         { src: "../assets/imgs/Zombies/Zombie/ZombieEat.png", id: "ZombieEat" },
         { src: "../assets/imgs/SunBack.png", id: "SunBoard" },
+        { src: "../assets/imgs/Sun.png", id: "Sun" },
+        { src: "../assets/imgs/ZombiesWon.png", id: "ZombieWon" },
     ]
     var loader = new createjs.LoadQueue()
     loader.loadManifest(manifest)
@@ -23,6 +27,8 @@ function loadAssets() {
 }
 
 function main() {
+    
+
 
     var canvas = document.getElementById("canvas")
     createjs.Ticker.timingMode = createjs.Ticker.RAF_SYNCHED;
@@ -55,6 +61,31 @@ function main() {
     // 添加舞台刷新
     createjs.Ticker.on("tick", window.stage)
     new GameStart()
+
+    var speechRecognition = new webkitSpeechRecognition();
+
+    speechRecognition.continuous = true;
+    speechRecognition.interimResults = true;
+    speechRecognition.lang = "cmn-Hans-CN"
+    speechRecognition.start();
+    speechRecognition.onresult = function (event) {
+        // 获取最后一句话
+        var last = event.results.length - 1;
+        var lastTranscript = event.results[last][0].transcript;
+        // 如果语句结束
+        if (event.results[last].isFinal) {
+            if (lastTranscript == "开始游戏") {
+                console.log("开始游戏")
+                new GameChoose()
+            } else if (lastTranscript == "返回") {
+                console.log("返回")
+                new GameStart()
+            }else if(lastTranscript == "开始冒险"){
+                console.log("开始冒险")
+                new GameAll()
+            }
+        }
+    }
 
     return
 }
