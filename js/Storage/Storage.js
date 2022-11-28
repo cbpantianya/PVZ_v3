@@ -24,7 +24,7 @@ class GameData {
             this.land.push([])
             if (nums == 5) {
                 for (let j = 0; j < 9; j++) {
-                    this.land[i].push(new LandUnit(j * 80, i * 80, 80, 80, 1, null))
+                    this.land[i].push(new LandUnit(j * 80 + 140, i * 100 + 80, 80, 100, 1, null, i))
                 }
             } else if (nums == 3) {
                 if (i == 0 || i == 4) {
@@ -65,6 +65,7 @@ class LandUnit {
         height, // 高度
         type, // 类型
         plant, // 植物, null表示无植物
+        colunm
     ) {
         // 成员变量
         this.x = x
@@ -78,6 +79,7 @@ class LandUnit {
 
         this.type = type
         this.plant = plant
+        this.colunm = colunm
 
     }
 }

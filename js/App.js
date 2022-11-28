@@ -9,6 +9,11 @@ function loadAssets() {
         { src: "../assets/imgs/BackGroundS/BG5S.jpg", id: "BG5S" },
         { src: "../assets/imgs/Zombies/Zombie/ZombieWalk1.png", id: "ZombieWalk" },
         { src: "../assets/imgs/Zombies/Zombie/ZombieDie.png", id: "ZombieDie" },
+        { src: "../assets/imgs/Cards/PeaShooter.png", id: "PeaShooterCard" },
+        { src: "../assets/imgs/Cards/PeaShooterG.png", id: "PeaShooterCardG" },
+        { src: "../assets/imgs/Plants/PeaShooter/PeaShooter.png", id: "PeaShooter" },
+        { src: "../assets/imgs/Plants/PB1.gif", id: "PB1" },
+        { src: "../assets/imgs/Zombies/Zombie/ZombieEat.png", id: "ZombieEat" },
     ]
     var loader = new createjs.LoadQueue()
     loader.loadManifest(manifest)
@@ -17,8 +22,6 @@ function loadAssets() {
 }
 
 function main() {
-
-
 
     var canvas = document.getElementById("canvas")
     createjs.Ticker.timingMode = createjs.Ticker.RAF_SYNCHED;
@@ -36,15 +39,17 @@ function main() {
     window.stage.addChild(bgContainer)
     bgContainer.name = "bgContainer"
 
-    // 新建容器，用于处理游戏内容
-    var gameContainer = new createjs.Container()
-    stage.addChild(gameContainer)
-    gameContainer.name = "gameContainer"
+
 
     // 新建容器，用于处理游戏UI
     var uiContainer = new createjs.Container()
     window.stage.addChild(uiContainer)
     uiContainer.name = "uiContainer"
+
+    // 新建容器，用于处理游戏内容
+    var gameContainer = new createjs.Container()
+    stage.addChild(gameContainer)
+    gameContainer.name = "gameContainer"
 
     // 添加舞台刷新
     createjs.Ticker.on("tick", window.stage)
