@@ -48,7 +48,6 @@ class GameChoose {
         // 移除所有事件
         e.target.removeAllEventListeners()
         // 跳转场景
-        //TODO:跳到一个场景，此场景包含所有土地，和绝大部分的卡牌，场景名称叫做GameAll
         new GameAll()
     }
 }
