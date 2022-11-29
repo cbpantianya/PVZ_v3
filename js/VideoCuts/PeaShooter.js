@@ -97,7 +97,7 @@ class PeaShooterCard {
     }
 
     tick() {
-        if (window.gameData.sun >= 100 ) {
+        if (window.gameData.sun >= 100 && this.waitTime <= 0) {
             window.stage.getChildByName("uiContainer").getChildByName("PeaShooterCard").addEventListener('click', this.click.bind(this))
             window.stage.getChildByName("uiContainer").getChildByName("PeaShooterCard").alpha = 1
             console.log("可以点击")
@@ -199,6 +199,7 @@ class PeaShooterCard {
         window.stage.getChildByName("uiContainer").getChildByName("PeaShooterCard").alpha = 0.5
         // 添加倒计时
         var time = 10
+        this.waitTime = 60
         var timeText = new createjs.Text(time, "20px Arial", "#000")
         timeText.x = this.card.x + 40
         timeText.y = this.card.y + 25
@@ -212,8 +213,10 @@ class PeaShooterCard {
                 if (window.gameData.sun >= 100) {
                     window.stage.getChildByName("uiContainer").getChildByName("PeaShooterCard").addEventListener('click', this.click.bind(this))
                     window.stage.getChildByName("uiContainer").getChildByName("PeaShooterCard").alpha = 1
+
                 }
             }
+            this.waitTime = 0
         }.bind(this), 600)
 
     }
