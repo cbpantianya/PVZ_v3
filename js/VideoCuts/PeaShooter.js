@@ -90,9 +90,18 @@ class PeaShooterCard {
 
         // 卡片点击事件
         card.addEventListener("click", this.click.bind(this))
+        card.addEventListener("tick", this.tick.bind(this))
 
         console.log(window.gameData.land)
         this.card = card
+    }
+
+    tick() {
+        if (window.gameData.sun >= 100 ) {
+            window.stage.getChildByName("uiContainer").getChildByName("PeaShooterCard").addEventListener('click', this.click.bind(this))
+            window.stage.getChildByName("uiContainer").getChildByName("PeaShooterCard").alpha = 1
+            console.log("可以点击")
+        }
     }
 
     click(e) {
@@ -186,6 +195,7 @@ class PeaShooterCard {
         window.stage.getChildByName("uiContainer").getChildByName("sunNumber").text = window.gameData.sun
         // 禁用卡片
         window.stage.getChildByName("uiContainer").getChildByName("PeaShooterCard").removeAllEventListeners()
+        window.stage.getChildByName("uiContainer").getChildByName("PeaShooterCard").addEventListener('tick', this.tick.bind(this))
         window.stage.getChildByName("uiContainer").getChildByName("PeaShooterCard").alpha = 0.5
         // 添加倒计时
         var time = 10
@@ -193,17 +203,18 @@ class PeaShooterCard {
         timeText.x = this.card.x + 40
         timeText.y = this.card.y + 25
         window.stage.getChildByName("uiContainer").addChild(timeText)
-        var timer = setInterval(function() {
+        var timer = setInterval(function () {
             time--
             timeText.text = time
             if (time == 0) {
                 clearInterval(timer)
-                window.stage.getChildByName("uiContainer").removeChild(timeText) 
-                if(window.gameData.sun >= 100){
+                window.stage.getChildByName("uiContainer").removeChild(timeText)
+                if (window.gameData.sun >= 100) {
                     window.stage.getChildByName("uiContainer").getChildByName("PeaShooterCard").addEventListener('click', this.click.bind(this))
                     window.stage.getChildByName("uiContainer").getChildByName("PeaShooterCard").alpha = 1
                 }
-            }}.bind(this),600)
+            }
+        }.bind(this), 600)
 
     }
 }
