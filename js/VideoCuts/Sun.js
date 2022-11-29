@@ -27,7 +27,7 @@ class Sun {
         sun.addEventListener("click", this.click.bind(this, sun))
 
         // 太阳下落
-        createjs.Tween.get(sun).to({ y: 400 }, 3000).call(this.fall.bind(this, sun))
+        createjs.Tween.get(sun).to({ y: 400 }, 6000).call(this.fall.bind(this, sun))
     }
 
     click(sun) {

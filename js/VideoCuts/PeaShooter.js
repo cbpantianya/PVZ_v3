@@ -3,6 +3,8 @@
 import { PB1 } from "./PB1.js"
 class PeaShooter {
     constructor(x, y) {
+
+
         this.__init__(x, y)
         this.blood = 50
         this.waitBlood = 0
@@ -75,9 +77,72 @@ class PeaShooter {
 
 class PeaShooterCard {
     constructor(x, y) {
-        this.__plantInHand__ = false;
-        this.waitTime = 60
+
         this.__init__(x, y)
+        this.__plantInHand__ = false;
+        this.waitTime = 0
+        var speechRecognition = new webkitSpeechRecognition();
+
+        speechRecognition.continuous = true;
+        speechRecognition.interimResults = true;
+        speechRecognition.lang = "cmn-Hans-CN"
+        speechRecognition.start();
+        speechRecognition.onresult = function (event) {
+            // 输出最后一句话
+            var last = event.results.length - 1;
+            var lastTranscript = event.results[last][0].transcript;
+            if (event.results[last].isFinal) {
+                console.log(lastTranscript)
+                // 正则表达式
+                const req = /在第[一二三四五12345]+行第[一二三四五六七八九123456789]+列[\u4e00-\u9fa5]+豌豆射手/
+                if (req.test(lastTranscript)) {
+                    // 匹配行列
+                    const row = lastTranscript.match(/第[一二三四五12345]+行/)
+                    const col = lastTranscript.match(/第[一二三四五六七八九123456789]+列/)
+                    // 转换为数字
+                    const rowNumber = row[0].match(/[一二三四五12345]+/)[0]
+                    const colNumber = col[0].match(/[一二三四五六七八九123456789]+/)[0]
+                    // 找到对应的土地
+                    const land = window.gameData.land[rowNumber - 1][colNumber - 1]
+                    // 判断土地是否为空
+                    if (land.plant == null) {
+                        // 种植
+                        land.plant = new PeaShooter(land.x + land.width / 2, land.y + land.height / 2)
+                        window.gameData.land[rowNumber - 1][colNumber - 1] = land
+                        window.gameData.sun -= 100
+                        window.stage.getChildByName("uiContainer").getChildByName("sunNumber").text = window.gameData.sun
+                        // 禁用卡片
+                        window.stage.getChildByName("uiContainer").getChildByName("PeaShooterCard").removeAllEventListeners()
+                        window.stage.getChildByName("uiContainer").getChildByName("PeaShooterCard").addEventListener('tick', this.tick.bind(this))
+                        window.stage.getChildByName("uiContainer").getChildByName("PeaShooterCard").alpha = 0.5
+                        // 添加倒计时
+                        var time = 10
+                        this.waitTime = 60
+                        var timeText = new createjs.Text(time, "20px Arial", "#000")
+                        timeText.x = this.card.x + 40
+                        timeText.y = this.card.y + 25
+                        window.stage.getChildByName("uiContainer").addChild(timeText)
+                        var timer = setInterval(function () {
+                            time--
+                            timeText.text = time
+                            if (time == 0) {
+                                clearInterval(timer)
+                                window.stage.getChildByName("uiContainer").removeChild(timeText)
+                                if (window.gameData.sun >= 100) {
+                                    window.stage.getChildByName("uiContainer").getChildByName("PeaShooterCard").addEventListener('click', this.click.bind(this))
+                                    window.stage.getChildByName("uiContainer").getChildByName("PeaShooterCard").alpha = 1
+                                }
+                                this.waitTime = 0
+                            }
+
+                        }.bind(this), 600)
+                    }
+                }
+            }
+
+        }.bind(this)
+
+
     }
 
     __init__(x, y) {
@@ -100,7 +165,11 @@ class PeaShooterCard {
         if (window.gameData.sun >= 100 && this.waitTime <= 0) {
             window.stage.getChildByName("uiContainer").getChildByName("PeaShooterCard").addEventListener('click', this.click.bind(this))
             window.stage.getChildByName("uiContainer").getChildByName("PeaShooterCard").alpha = 1
-            console.log("可以点击")
+        } else {
+            if (window.gameData.sun < 100) {
+                window.stage.getChildByName("uiContainer").getChildByName("PeaShooterCard").removeAllEventListeners("click")
+                window.stage.getChildByName("uiContainer").getChildByName("PeaShooterCard").alpha = 0.5
+            }
         }
     }
 

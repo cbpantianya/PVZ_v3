@@ -2,11 +2,13 @@ import { Zombie } from '../VideoCuts/Zombie.js'
 import { PeaShooterCard } from '../VideoCuts/PeaShooter.js'
 import { GameData } from "../Storage/Storage.js"
 import { SunBoard, Sun } from "../VideoCuts/Sun.js"
+import { SunFlowerCard } from "../VideoCuts/SunFlower.js"
 
 class GameAll {
     constructor() {
 
         this.zombieList = [] // 僵尸驻场列表
+        
         this.__init__()
 
     }
@@ -48,6 +50,7 @@ class GameAll {
         // 添加Card
         var peaShooterCard = new PeaShooterCard(130, 0)
         var sunBoard = new SunBoard(0, 0)
+        var sunFlowerCard = new SunFlowerCard(260, 0)
 
 
 

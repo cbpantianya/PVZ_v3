@@ -19,6 +19,8 @@ function loadAssets() {
         { src: "../assets/imgs/SunBack.png", id: "SunBoard" },
         { src: "../assets/imgs/Sun.png", id: "Sun" },
         { src: "../assets/imgs/ZombiesWon.png", id: "ZombieWon" },
+        { src: "../assets/imgs/Cards/SunFlower.png", id: "SunFlowerCard" },
+        { src: "../assets/imgs/Plants/SunFlower/SunFlower.png", id: "SunFlower" },
     ]
     var loader = new createjs.LoadQueue()
     loader.loadManifest(manifest)
@@ -27,7 +29,7 @@ function loadAssets() {
 }
 
 function main() {
-    
+
 
 
     var canvas = document.getElementById("canvas")
@@ -80,9 +82,10 @@ function main() {
             } else if (lastTranscript == "返回") {
                 console.log("返回")
                 new GameStart()
-            }else if(lastTranscript == "开始冒险"){
+            } else if (lastTranscript == "开始冒险") {
                 console.log("开始冒险")
                 new GameAll()
+                speechRecognition.stop()
             }
         }
     }
