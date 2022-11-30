@@ -11,6 +11,7 @@ class GameData {
         this.level = 1 // 当前关卡
         this.land = [] // 地图数据
         this.sun = 100 // 当前阳光数
+        this.sunOnland = 0;
     }
 
     // 重置游戏数据

@@ -1,12 +1,13 @@
 // 豌豆射手的影片剪辑
 // 包括卡片和射手本身
 import { PB1 } from "./PB1.js"
+import { SunFlower } from "./SunFlower.js"
 class PeaShooter {
     constructor(x, y) {
 
 
         this.__init__(x, y)
-        this.blood = 50
+        this.blood = 6
         this.waitBlood = 0
     }
 
@@ -44,6 +45,7 @@ class PeaShooter {
         if (this.waitBlood == 10) {
             this.waitBlood = 0
             this.blood -= 1
+            console.log("豌豆射手血量：" + this.blood)
         }
         this.waitBlood++
     }
@@ -137,7 +139,71 @@ class PeaShooterCard {
 
                         }.bind(this), 600)
                     }
+
+
                 }
+                const req2 = /在第[一二三四五12345]+行第[一二三四五六七八九123456789]+列[\u4e00-\u9fa5]+太阳花/
+                if (req2.test(lastTranscript)) {
+                    console.log("太阳花")
+                    // 匹配行列
+                    const row = lastTranscript.match(/第[一二三四五12345]+行/)
+                    const col = lastTranscript.match(/第[一二三四五六七八九123456789]+列/)
+                    // 转换为数字
+                    const rowNumber = row[0].match(/[一二三四五12345]+/)[0]
+                    const colNumber = col[0].match(/[一二三四五六七八九123456789]+/)[0]
+                    // 找到对应的土地
+                    const land = window.gameData.land[rowNumber - 1][colNumber - 1]
+                    // 判断土地是否为空
+                    if (land.plant == null) {
+                        // 种植
+                        land.plant = new SunFlower(land.x + land.width / 2, land.y + land.height / 2)
+                        window.gameData.land[rowNumber - 1][colNumber - 1] = land
+                        window.gameData.sun -= 50
+                        window.stage.getChildByName("uiContainer").getChildByName("sunNumber").text = window.gameData.sun
+                        // 禁用卡片
+                        window.stage.getChildByName("uiContainer").getChildByName("SunFlowerCard").removeAllEventListeners()
+                        window.stage.getChildByName("uiContainer").getChildByName("SunFlowerCard").addEventListener('tick', this.tick.bind(this))
+                        window.stage.getChildByName("uiContainer").getChildByName("SunFlowerCard").alpha = 0.5
+                        // 添加倒计时
+                        var time = 10
+                        this.waitTime = 60
+                        var timeText = new createjs.Text(time, "20px Arial", "#000")
+                        timeText.x = window.stage.getChildByName("uiContainer").getChildByName("SunFlowerCard").x + 40
+                        timeText.y = window.stage.getChildByName("uiContainer").getChildByName("SunFlowerCard").y + 25
+                        window.stage.getChildByName("uiContainer").addChild(timeText)
+                        var timer = setInterval(function () {
+                            time--
+                            timeText.text = time
+                            if (time == 0) {
+                                clearInterval(timer)
+                                window.stage.getChildByName("uiContainer").removeChild(timeText)
+                                if (window.gameData.sun >= 50) {
+                                    window.stage.getChildByName("uiContainer").getChildByName("SunFlowerCard").addEventListener('click', this.click.bind(this))
+                                    window.stage.getChildByName("uiContainer").getChildByName("SunFlowerCard").alpha = 1
+                                }
+                                this.waitTime = 0
+                            }
+
+                        }.bind(this), 600)
+                    }
+
+
+                }
+
+                const req3 = /收集太阳/
+                if (req3.test(lastTranscript)) {
+                    // 销毁所有太阳
+                    window.gameData.sun += window.gameData.sunOnland * 25
+                    window.stage.getChildByName("uiContainer").getChildByName("sunNumber").text = window.gameData.sun
+                    window.gameData.sunOnland = 0
+                    while (window.stage.getChildByName("gameContainer").getChildByName("sun") != null) {
+                        window.stage.getChildByName("gameContainer").removeChild(window.stage.getChildByName("gameContainer").getChildByName("sun"))
+                    }
+
+                }
+
+
+
             }
 
         }.bind(this)

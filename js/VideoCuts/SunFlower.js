@@ -1,8 +1,13 @@
+import { Sun } from '../VideoCuts/Sun.js'
+
 class SunFlower {
     constructor(x, y) {
-        this.__init__(x, y)
-        this.blood = 50
+
+        this.blood = 6
         this.waitBlood = 0
+        this.waitSun = 500
+
+        this.__init__(x, y)
     }
 
     __init__(x, y) {
@@ -27,6 +32,7 @@ class SunFlower {
     }
     bloodJ() {
         if (this.waitBlood == 10) {
+            console.log('血量减少')
             this.waitBlood = 0
             this.blood -= 1
         }
@@ -38,7 +44,37 @@ class SunFlower {
     }
 
     tick() {
+        // 生成太阳
+        this.waitSun--;
+        if (this.waitSun == 0) {
+            this.waitSun = 200
+            // 产生一个太阳
+            var sun = new Sun(this.peaShooter.x - 40, this.peaShooter.y - 30, 'fromPlant')
 
+        }
+        if (this.blood <= 0) {
+            this.peaShooter.alpha = 0.5
+            // 移除监听并销毁自己
+            this.peaShooter.removeEventListener("tick", this.tick.bind(this))
+            window.stage.getChildByName("gameContainer").removeChild(this.peaShooter)
+            window.gameData.land.forEach(e => {
+                e.forEach(e => {
+                    if (e.plant == this) {
+                        e.plant = null
+                    }
+                });
+            });
+            console.log(window.gameData.land)
+            console.log("豌豆射手死了")
+            // 告诉附近的僵尸可以移动了
+            window.zombieList.forEach(e => {
+                if (Math.abs(e.zombie.x - this.peaShooter.x) < 200) {
+                    e.isMove = true
+                    e.zombie.gotoAndPlay("walk")
+                }
+            });
+
+        }
     }
 }
 
@@ -66,12 +102,12 @@ class SunFlowerCard {
     }
 
     tick() {
-        if (window.gameData.sun >= 100 && this.waitTime <= 0) {
+        if (window.gameData.sun >= 50 && this.waitTime <= 0) {
             window.stage.getChildByName("uiContainer").getChildByName("SunFlowerCard").addEventListener('click', this.click.bind(this))
             window.stage.getChildByName("uiContainer").getChildByName("SunFlowerCard").alpha = 1
             //console.log("可以点击")
         } else {
-            if (window.gameData.sun < 100) {
+            if (window.gameData.sun < 50) {
 
                 window.stage.getChildByName("uiContainer").getChildByName("SunFlowerCard").removeEventListener('click', this.click.bind(this))
                 window.stage.getChildByName("uiContainer").getChildByName("SunFlowerCard").alpha = 0.5
@@ -167,7 +203,7 @@ class SunFlowerCard {
             }
         }
 
-        window.gameData.sun -= 100
+        window.gameData.sun -= 50
         window.stage.getChildByName("uiContainer").getChildByName("sunNumber").text = window.gameData.sun
         // 禁用卡片
         window.stage.getChildByName("uiContainer").getChildByName("SunFlowerCard").removeAllEventListeners()
@@ -186,7 +222,7 @@ class SunFlowerCard {
             if (time == 0) {
                 clearInterval(timer)
                 window.stage.getChildByName("uiContainer").removeChild(timeText)
-                if (window.gameData.sun >= 100) {
+                if (window.gameData.sun >= 50) {
                     window.stage.getChildByName("uiContainer").getChildByName("SunFlowerCard").addEventListener('click', this.click.bind(this))
                     window.stage.getChildByName("uiContainer").getChildByName("SunFlowerCard").alpha = 1
                 }
@@ -198,4 +234,4 @@ class SunFlowerCard {
     }
 }
 
-export { SunFlowerCard }
+export { SunFlowerCard, SunFlower }

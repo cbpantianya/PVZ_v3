@@ -8,7 +8,7 @@ class GameAll {
     constructor() {
 
         this.zombieList = [] // 僵尸驻场列表
-        
+
         this.__init__()
 
     }
@@ -98,6 +98,7 @@ class GameAll {
 
         // 生成太阳
         if (Math.random() < 0.01) {
+            window.gameData.sunOnland++
             new Sun(Math.random() * 600, 0)
         }
     }

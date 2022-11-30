@@ -39,7 +39,7 @@ function main() {
 
     // 获取容器并初始化舞台
     window.stage = new createjs.Stage(canvas)
-    stage.enableMouseOver(50)
+    stage.enableMouseOver(20)
 
 
 
