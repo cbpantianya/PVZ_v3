@@ -3,6 +3,7 @@ import { PeaShooterCard } from '../VideoCuts/PeaShooter.js'
 import { GameData } from "../Storage/Storage.js"
 import { SunBoard, Sun } from "../VideoCuts/Sun.js"
 import { SunFlowerCard } from "../VideoCuts/SunFlower.js"
+import { CherryBombCard } from '../VideoCuts/CherryBomb.js'
 
 class GameAll {
     constructor() {
@@ -51,6 +52,7 @@ class GameAll {
         var peaShooterCard = new PeaShooterCard(130, 0)
         var sunBoard = new SunBoard(0, 0)
         var sunFlowerCard = new SunFlowerCard(260, 0)
+        var cherryBombCard = new CherryBombCard(390, 0)
 
 
 

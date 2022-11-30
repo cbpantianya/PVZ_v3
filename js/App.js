@@ -21,6 +21,10 @@ function loadAssets() {
         { src: "../assets/imgs/ZombiesWon.png", id: "ZombieWon" },
         { src: "../assets/imgs/Cards/SunFlower.png", id: "SunFlowerCard" },
         { src: "../assets/imgs/Plants/SunFlower/SunFlower.png", id: "SunFlower" },
+        { src: "../assets/imgs/Cards/CherryBomb.png", id: "CherryBombCard" },
+        { src:"../assets/imgs/Plants/CherryBomb/CherryBomb.png", id: "CherryBomb" },
+        { src: "../assets/imgs/Plants/CherryBomb/Boom.gif", id: "CherryBombBoom" },
+        { src: "../assets/imgs/Zombies/Zombie/ZombieBoomDie.png", id: "ZombieBoomDie" },
     ]
     var loader = new createjs.LoadQueue()
     loader.loadManifest(manifest)

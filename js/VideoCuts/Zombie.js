@@ -9,14 +9,15 @@ class Zombie {
     __init__(x, y) {
         // 生成僵尸
         var zombieSheet = new createjs.SpriteSheet({
-            "images": [window.loader.getResult("ZombieWalk"), window.loader.getResult("ZombieDie"), window.loader.getResult("ZombieEat")],
+            "images": [window.loader.getResult("ZombieWalk"), window.loader.getResult("ZombieDie"), window.loader.getResult("ZombieEat"), window.loader.getResult("ZombieBoomDie")],
             "frames": { "width": 166, "height": 144, "count": 200, "regX": 0, "regY": 0, "spacing": 0, "margin": 0 },
             "animations": {
                 "walk": [0, 20, "walk", 0.5],
                 "die": [42, 50, "die", 0.5],
-                "eat": [70, 80, "eat", 0.5]
+                "eat": [70, 80, "eat", 0.5],
+                "boom": [102, 116, , 0.2]
             }
-        });
+        })
         this.zombie = new createjs.Sprite(zombieSheet, "walk");
         this.zombie.x = x
         this.zombie.y = y
@@ -68,7 +69,7 @@ class Zombie {
                     }
                 }
             }
-        }
+        }``
     }
 
     attacked() {
@@ -76,6 +77,11 @@ class Zombie {
         setTimeout(() => {
             this.zombie.alpha = 1
         }, 100);
+    }
+
+    boom(){
+        this.zombie.gotoAndPlay("boom")
+        this.isMove = false
     }
 }
 
