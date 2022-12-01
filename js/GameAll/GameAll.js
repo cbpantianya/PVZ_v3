@@ -38,12 +38,14 @@ class GameAll {
         window.gameData.generateLand(5)
 
         // 播放完动画之后，给僵尸分配道次
+        var count = 0
         this.zombieList.forEach(zombie => {
-            zombie.colunm = Math.floor(Math.random() * 5)
+            zombie.colunm = count
             // 调整位置
             zombie.zombie.x = 600 + zombie.colunm * 100 + Math.random() * 80
             zombie.zombie.y = zombie.colunm * 100 + 20
             console.log(zombie.colunm)
+            count++
         })
 
         window.zombieList = this.zombieList

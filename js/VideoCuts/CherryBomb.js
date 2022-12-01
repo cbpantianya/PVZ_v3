@@ -69,9 +69,11 @@ class CherryBomb {
 
         }.bind(this), 500)
 
+
         // 告诉附近的僵尸爆炸
         window.zombieList.forEach(e => {
-            if (Math.abs(e.zombie.x - this.peaShooter.x) < 200) {
+
+            if (Math.abs(e.zombie.x - this.peaShooter.x  + 100) < 120 && Math.abs(e.zombie.y - this.peaShooter.y + 80) < 150) {
 
                 (function (item) {
                     setTimeout(function () {
@@ -83,7 +85,7 @@ class CherryBomb {
                             window.zombieList.splice(window.zombieList.indexOf(item), 1)
                         }, 2000)
 
-                    }, 1000)
+                    }, 600)
                 })(e)
 
 
