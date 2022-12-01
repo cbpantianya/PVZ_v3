@@ -23,17 +23,15 @@ class Sun {
         sun.x = x
         sun.y = y
         sun.name = "sun"
-        
+
         window.stage.getChildByName("gameContainer").addChild(sun)
         // 点击事件
         sun.addEventListener("click", this.click.bind(this, sun))
 
         // 太阳下落
-        if (this.type != 'fromPlant') {
-            createjs.Tween.get(sun).to({ y: 400 }, 6000).call(this.fall.bind(this, sun))
-        } else {
-            this.fall(sun)
-        }
+
+        this.fall(sun)
+
 
     }
 
@@ -52,7 +50,7 @@ class Sun {
             // 向上一点，然后掉下来
             createjs.Tween.get(sun).to({ y: sun.y - 50 }, 1000, createjs.Ease.getPowInOut(2)).to({ y: sun.y + 50 }, 1000, createjs.Ease.getPowInOut(2)).wait(3000).call(this.destroy.bind(this, sun))
         } else {
-            createjs.Tween.get(sun).to({ y: 800 }, 6000).call(this.destroy.bind(this, sun))
+            createjs.Tween.get(sun).to({ y: sun.y + 300 }, 8000).wait(5000).call(this.destroy.bind(this, sun))
         }
 
     }

@@ -67,7 +67,7 @@ class CherryBomb {
                 window.stage.getChildByName("gameContainer").removeChild(img)
             }, 1000)
 
-        }.bind(this), 1000)
+        }.bind(this), 500)
 
         // 告诉附近的僵尸爆炸
         window.zombieList.forEach(e => {
