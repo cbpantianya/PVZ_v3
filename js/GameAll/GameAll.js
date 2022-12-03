@@ -4,6 +4,7 @@ import { GameData } from "../Storage/Storage.js"
 import { SunBoard, Sun } from "../VideoCuts/Sun.js"
 import { SunFlowerCard } from "../VideoCuts/SunFlower.js"
 import { CherryBombCard } from '../VideoCuts/CherryBomb.js'
+import { WallNutCard } from '../VideoCuts/WallNut.js'
 
 class GameAll {
     constructor() {
@@ -53,8 +54,9 @@ class GameAll {
         // 添加Card
         var peaShooterCard = new PeaShooterCard(130, 0)
         var sunBoard = new SunBoard(0, 0)
-        var sunFlowerCard = new SunFlowerCard(260, 0)
-        var cherryBombCard = new CherryBombCard(390, 0)
+        var sunFlowerCard = new SunFlowerCard(250, 0)
+        var cherryBombCard = new CherryBombCard(370, 0)
+        var wallNutCard = new WallNutCard(490, 0)
 
 
 

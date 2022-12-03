@@ -25,6 +25,8 @@ function loadAssets() {
         { src:"../assets/imgs/Plants/CherryBomb/CherryBomb.png", id: "CherryBomb" },
         { src: "../assets/imgs/Plants/CherryBomb/Boom.gif", id: "CherryBombBoom" },
         { src: "../assets/imgs/Zombies/Zombie/ZombieBoomDie.png", id: "ZombieBoomDie" },
+        { src: "../assets/imgs/Cards/WallNut.png", id: "WallNutCard" },
+        { src: "../assets/imgs/Plants/WallNut/WallNut.png", id: "WallNut" },
     ]
     var loader = new createjs.LoadQueue()
     loader.loadManifest(manifest)
