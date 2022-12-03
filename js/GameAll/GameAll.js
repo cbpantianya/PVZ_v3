@@ -17,11 +17,14 @@ class GameAll {
     // 清除三容器
     var bgContainer = window.stage.getChildByName("bgContainer");
     bgContainer.removeAllChildren();
-    var gameContainer = window.stage.getChildByName("gameContainer");
-    gameContainer.removeAllChildren();
+
     var uiContainer = window.stage.getChildByName("uiContainer");
     uiContainer.removeAllChildren();
 
+    
+
+    var gameContainer = window.stage.getChildByName("gameContainer");
+    gameContainer.removeAllChildren();
     // 绘制背景
     var bg = new createjs.Bitmap(window.loader.getResult("BG5S"));
     bg.x = -120;
@@ -65,17 +68,17 @@ class GameAll {
     }, 1000);
 
     // 绘制地皮
-    window.gameData.land.forEach((land) => {
-      // 添加矩形
-      land.forEach((rect) => {
-        // 新建矩形
-        var shape = new createjs.Shape();
-        shape.graphics
-          .beginStroke("green")
-          .drawRect(rect.x, rect.y, rect.width, rect.height);
-        gameContainer.addChild(shape);
-      });
-    });
+    // window.gameData.land.forEach((land) => {
+    //   // 添加矩形
+    //   land.forEach((rect) => {
+    //     // 新建矩形
+    //     var shape = new createjs.Shape();
+    //     shape.graphics
+    //       .beginStroke("green")
+    //       .drawRect(rect.x, rect.y, rect.width, rect.height);
+    //     gameContainer.addChild(shape);
+    //   });
+    // });
   }
 
   // 游戏开始

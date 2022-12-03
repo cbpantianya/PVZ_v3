@@ -31,7 +31,7 @@ class PeaShooter {
     this.peaShooter.y = y;
     this.peaShooter.regX = 35;
     this.peaShooter.regY = 35;
-    window.stage.getChildByName("gameContainer").addChild(this.peaShooter);
+    window.stage.getChildByName("plantContainer").addChild(this.peaShooter);
     this.attackRange = 700;
     this.waitAttack = 0;
     // 血量监测
@@ -61,7 +61,7 @@ class PeaShooter {
       this.peaShooter.alpha = 0.5;
       // 移除监听并销毁自己
       this.peaShooter.removeEventListener("tick", this.tick.bind(this));
-      window.stage.getChildByName("gameContainer").removeChild(this.peaShooter);
+      window.stage.getChildByName("plantContainer").removeChild(this.peaShooter);
       window.gameData.land.forEach((e) => {
         e.forEach((e) => {
           if (e.plant == this) {
@@ -256,14 +256,14 @@ class PeaShooterCard {
           window.gameData.sunOnland = 0;
           while (
             window.stage
-              .getChildByName("gameContainer")
+              .getChildByName("plantContainer")
               .getChildByName("sun") != null
           ) {
             window.stage
-              .getChildByName("gameContainer")
+              .getChildByName("plantContainer")
               .removeChild(
                 window.stage
-                  .getChildByName("gameContainer")
+                  .getChildByName("plantContainer")
                   .getChildByName("sun")
               );
           }
@@ -291,7 +291,7 @@ class PeaShooterCard {
     var text = new createjs.Text("100", "16px Arial", "#000000");
     text.x = x + 65;
     text.y = y + 45;
-    window.stage.getChildByName("gameContainer").addChild(text);
+    window.stage.getChildByName("plantContainer").addChild(text);
   }
 
   tick() {
@@ -320,22 +320,22 @@ class PeaShooterCard {
     if (this.__plantInHand__) {
       // 删除射手
       window.stage
-        .getChildByName("gameContainer")
+        .getChildByName("plantContainer")
         .removeChild(this.peaShooter.peaShooter);
       this.__plantInHand__ = false;
       // 删除虚拟射手
       window.stage
-        .getChildByName("gameContainer")
+        .getChildByName("plantContainer")
         .removeChild(
           window.stage
-            .getChildByName("gameContainer")
+            .getChildByName("plantContainer")
             .getChildByName("vituralPeaShooter")
         );
     } else {
       // 生成射手,并跟随鼠标
       var PeaShooterInHand = new PeaShooter(e.stageX, e.stageY);
       window.stage
-        .getChildByName("gameContainer")
+        .getChildByName("plantContainer")
         .addChild(PeaShooterInHand.peaShooter);
 
       // 鼠标移动事件
@@ -381,14 +381,14 @@ class PeaShooterCard {
       // 通过name场上是否存在虚拟射手
       if (
         window.stage
-          .getChildByName("gameContainer")
+          .getChildByName("plantContainer")
           .getChildByName("vituralPeaShooter")
       ) {
         window.stage
-          .getChildByName("gameContainer")
+          .getChildByName("plantContainer")
           .getChildByName("vituralPeaShooter").x = minLand.center.x;
         window.stage
-          .getChildByName("gameContainer")
+          .getChildByName("plantContainer")
           .getChildByName("vituralPeaShooter").y = minLand.center.y;
       } else {
         // 生成一个新的射手，但是半透明
@@ -399,7 +399,7 @@ class PeaShooterCard {
         vituralPeaShooter.peaShooter.alpha = 0.5;
         vituralPeaShooter.peaShooter.name = "vituralPeaShooter";
         window.stage
-          .getChildByName("gameContainer")
+          .getChildByName("plantContainer")
           .addChild(vituralPeaShooter.peaShooter);
 
         vituralPeaShooter.peaShooter.addEventListener(
@@ -409,10 +409,10 @@ class PeaShooterCard {
       }
     } else {
       window.stage
-        .getChildByName("gameContainer")
+        .getChildByName("plantContainer")
         .removeChild(
           window.stage
-            .getChildByName("gameContainer")
+            .getChildByName("plantContainer")
             .getChildByName("vituralPeaShooter")
         );
     }
@@ -423,26 +423,26 @@ class PeaShooterCard {
     // 在指定位置生成一个豌豆射手
     var peaShooter = new PeaShooter(
       window.stage
-        .getChildByName("gameContainer")
+        .getChildByName("plantContainer")
         .getChildByName("vituralPeaShooter").x,
       window.stage
-        .getChildByName("gameContainer")
+        .getChildByName("plantContainer")
         .getChildByName("vituralPeaShooter").y
     );
     window.stage
-      .getChildByName("gameContainer")
+      .getChildByName("plantContainer")
       .addChild(peaShooter.peaShooter);
     // 删除虚拟射手
     window.stage
-      .getChildByName("gameContainer")
+      .getChildByName("plantContainer")
       .removeChild(
         window.stage
-          .getChildByName("gameContainer")
+          .getChildByName("plantContainer")
           .getChildByName("vituralPeaShooter")
       );
     // 删除射手
     window.stage
-      .getChildByName("gameContainer")
+      .getChildByName("plantContainer")
       .removeChild(this.peaShooter.peaShooter);
     this.__plantInHand__ = false;
     for (var i = 0; i < 5; i++) {

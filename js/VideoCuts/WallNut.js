@@ -28,11 +28,18 @@ class WallNut {
     this.peaShooter.y = y;
     this.peaShooter.regX = 35;
     this.peaShooter.regY = 35;
-    window.stage.getChildByName("gameContainer").addChild(this.peaShooter);
+    // 设置图层在最下面
+    window.stage.getChildByName("plantContainer").addChildAt(
+        this.peaShooter,
+        1
+    );
+    //window.stage.getChildByName("plantContainer").addChild(this.peaShooter);
     this.attackRange = 700;
     this.waitAttack = 0;
     // 血量监测
     this.peaShooter.addEventListener("tick", this.tick.bind(this));
+
+    console.log(window.stage.getChildByName("plantContainer"))
   }
   bloodJ() {
     if (this.waitBlood == 10) {
@@ -52,7 +59,7 @@ class WallNut {
       this.peaShooter.alpha = 0.5;
       // 移除监听并销毁自己
       this.peaShooter.removeEventListener("tick", this.tick.bind(this));
-      window.stage.getChildByName("gameContainer").removeChild(this.peaShooter);
+      window.stage.getChildByName("plantContainer").removeChild(this.peaShooter);
       window.gameData.land.forEach((e) => {
         e.forEach((e) => {
           if (e.plant == this) {
@@ -98,7 +105,7 @@ class WallNutCard {
     var text = new createjs.Text("50", "16px Arial", "#000000");
     text.x = x + 65;
     text.y = y + 45;
-    window.stage.getChildByName("gameContainer").addChild(text);
+    window.stage.getChildByName("plantContainer").addChild(text);
   }
 
   tick() {
@@ -128,22 +135,22 @@ class WallNutCard {
     if (this.__plantInHand__) {
       // 删除射手
       window.stage
-        .getChildByName("gameContainer")
+        .getChildByName("plantContainer")
         .removeChild(this.peaShooter.peaShooter);
       this.__plantInHand__ = false;
       // 删除虚拟射手
       window.stage
-        .getChildByName("gameContainer")
+        .getChildByName("plantContainer")
         .removeChild(
           window.stage
-            .getChildByName("gameContainer")
+            .getChildByName("plantContainer")
             .getChildByName("vituralWallNut")
         );
     } else {
       // 生成射手,并跟随鼠标
       var PeaShooterInHand = new WallNut(e.stageX, e.stageY);
       window.stage
-        .getChildByName("gameContainer")
+        .getChildByName("plantContainer")
         .addChild(PeaShooterInHand.peaShooter);
 
       // 鼠标移动事件
@@ -189,14 +196,14 @@ class WallNutCard {
       // 通过name场上是否存在虚拟射手
       if (
         window.stage
-          .getChildByName("gameContainer")
+          .getChildByName("plantContainer")
           .getChildByName("vituralWallNut")
       ) {
         window.stage
-          .getChildByName("gameContainer")
+          .getChildByName("plantContainer")
           .getChildByName("vituralWallNut").x = minLand.center.x;
         window.stage
-          .getChildByName("gameContainer")
+          .getChildByName("plantContainer")
           .getChildByName("vituralWallNut").y = minLand.center.y;
       } else {
         // 生成一个新的射手，但是半透明
@@ -204,7 +211,7 @@ class WallNutCard {
         vituralPeaShooter.peaShooter.alpha = 0.5;
         vituralPeaShooter.peaShooter.name = "vituralWallNut";
         window.stage
-          .getChildByName("gameContainer")
+          .getChildByName("plantContainer")
           .addChild(vituralPeaShooter.peaShooter);
 
         vituralPeaShooter.peaShooter.addEventListener(
@@ -214,10 +221,10 @@ class WallNutCard {
       }
     } else {
       window.stage
-        .getChildByName("gameContainer")
+        .getChildByName("plantContainer")
         .removeChild(
           window.stage
-            .getChildByName("gameContainer")
+            .getChildByName("plantContainer")
             .getChildByName("vituralWallNut")
         );
     }
@@ -228,26 +235,26 @@ class WallNutCard {
     // 在指定位置生成一个豌豆射手
     var peaShooter = new WallNut(
       window.stage
-        .getChildByName("gameContainer")
+        .getChildByName("plantContainer")
         .getChildByName("vituralWallNut").x,
       window.stage
-        .getChildByName("gameContainer")
+        .getChildByName("plantContainer")
         .getChildByName("vituralWallNut").y
     );
     window.stage
-      .getChildByName("gameContainer")
+      .getChildByName("plantContainer")
       .addChild(peaShooter.peaShooter);
     // 删除虚拟射手
     window.stage
-      .getChildByName("gameContainer")
+      .getChildByName("plantContainer")
       .removeChild(
         window.stage
-          .getChildByName("gameContainer")
+          .getChildByName("plantContainer")
           .getChildByName("vituralWallNut")
       );
     // 删除射手
     window.stage
-      .getChildByName("gameContainer")
+      .getChildByName("plantContainer")
       .removeChild(this.peaShooter.peaShooter);
     this.__plantInHand__ = false;
     for (var i = 0; i < 5; i++) {

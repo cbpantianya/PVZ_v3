@@ -60,10 +60,16 @@ function main() {
   window.stage.addChild(bgContainer);
   bgContainer.name = "bgContainer";
 
+
+
   // 新建容器，用于处理游戏UI
   var uiContainer = new createjs.Container();
   window.stage.addChild(uiContainer);
   uiContainer.name = "uiContainer";
+
+  var plantContainer = new createjs.Container();
+    window.stage.addChild(plantContainer);  
+    plantContainer.name = "plantContainer";
 
   // 新建容器，用于处理游戏内容
   var gameContainer = new createjs.Container();
