@@ -94,10 +94,10 @@ class CherryBomb {
 
             setTimeout(function () {
               window.stage
-                .getChildByName("plantContainer")
+                .getChildByName("gameContainer")
                 .removeChild(item.zombie);
               window.zombieList.splice(window.zombieList.indexOf(item), 1);
-            }, 2000);
+            }, 2500);
           }, 600);
         })(e);
       }

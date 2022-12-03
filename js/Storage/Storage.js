@@ -11,6 +11,7 @@ class GameData {
     this.land = []; // 地图数据
     this.sun = 100; // 当前阳光数
     this.sunOnland = 0;
+    this.plantInhand = false;
   }
 
   // 重置游戏数据

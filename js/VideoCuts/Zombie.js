@@ -4,6 +4,7 @@ class Zombie {
     this.colunm = null;
     this.isMove = true;
     this.__init__(x, y);
+    this.moveS = 0.4;
   }
 
   __init__(x, y) {
@@ -40,7 +41,7 @@ class Zombie {
   }
 
   move() {
-    this.zombie.x -= 0.4;
+    this.zombie.x -= this.moveS;
   }
 
   tick() {
@@ -49,7 +50,7 @@ class Zombie {
     }
 
     // 当僵尸移动到20像素的时候，游戏失败
-    if (this.zombie.x < 20) {
+    if (this.zombie.x < -20) {
       // 显示：僵尸吃掉了你的脑子
       if (
         !window.stage.getChildByName("uiContainer").getChildByName("ZombieWon")

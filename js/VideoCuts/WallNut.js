@@ -29,17 +29,16 @@ class WallNut {
     this.peaShooter.regX = 35;
     this.peaShooter.regY = 35;
     // 设置图层在最下面
-    window.stage.getChildByName("plantContainer").addChildAt(
-        this.peaShooter,
-        1
-    );
+    window.stage
+      .getChildByName("plantContainer")
+      .addChildAt(this.peaShooter, 1);
     //window.stage.getChildByName("plantContainer").addChild(this.peaShooter);
     this.attackRange = 700;
     this.waitAttack = 0;
     // 血量监测
     this.peaShooter.addEventListener("tick", this.tick.bind(this));
 
-    console.log(window.stage.getChildByName("plantContainer"))
+    console.log(window.stage.getChildByName("plantContainer"));
   }
   bloodJ() {
     if (this.waitBlood == 10) {
@@ -59,7 +58,9 @@ class WallNut {
       this.peaShooter.alpha = 0.5;
       // 移除监听并销毁自己
       this.peaShooter.removeEventListener("tick", this.tick.bind(this));
-      window.stage.getChildByName("plantContainer").removeChild(this.peaShooter);
+      window.stage
+        .getChildByName("plantContainer")
+        .removeChild(this.peaShooter);
       window.gameData.land.forEach((e) => {
         e.forEach((e) => {
           if (e.plant == this) {

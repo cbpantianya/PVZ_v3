@@ -5,6 +5,7 @@ import { SunBoard, Sun } from "../VideoCuts/Sun.js";
 import { SunFlowerCard } from "../VideoCuts/SunFlower.js";
 import { CherryBombCard } from "../VideoCuts/CherryBomb.js";
 import { WallNutCard } from "../VideoCuts/WallNut.js";
+import { Car } from "../VideoCuts/Car.js";
 
 class GameAll {
   constructor() {
@@ -20,8 +21,6 @@ class GameAll {
 
     var uiContainer = window.stage.getChildByName("uiContainer");
     uiContainer.removeAllChildren();
-
-    
 
     var gameContainer = window.stage.getChildByName("gameContainer");
     gameContainer.removeAllChildren();
@@ -46,7 +45,7 @@ class GameAll {
     this.zombieList.forEach((zombie) => {
       zombie.colunm = count;
       // 调整位置
-      zombie.zombie.x = 600 + zombie.colunm * 100 + Math.random() * 80;
+      zombie.zombie.x = 900 + zombie.colunm * -100 + Math.random() * 80;
       zombie.zombie.y = zombie.colunm * 100 + 20;
       console.log(zombie.colunm);
       count++;
@@ -60,6 +59,11 @@ class GameAll {
     var sunFlowerCard = new SunFlowerCard(250, 0);
     var cherryBombCard = new CherryBombCard(370, 0);
     var wallNutCard = new WallNutCard(490, 0);
+    new Car(100, 120);
+    new Car(100, 220);
+    new Car(100, 320);
+    new Car(100, 420);
+    new Car(100, 520);
 
     // 等待5秒后，僵尸开始行动
     setTimeout(() => {
@@ -68,17 +72,17 @@ class GameAll {
     }, 1000);
 
     // 绘制地皮
-    // window.gameData.land.forEach((land) => {
-    //   // 添加矩形
-    //   land.forEach((rect) => {
-    //     // 新建矩形
-    //     var shape = new createjs.Shape();
-    //     shape.graphics
-    //       .beginStroke("green")
-    //       .drawRect(rect.x, rect.y, rect.width, rect.height);
-    //     gameContainer.addChild(shape);
-    //   });
-    // });
+    window.gameData.land.forEach((land) => {
+      // 添加矩形
+      land.forEach((rect) => {
+        // 新建矩形
+        var shape = new createjs.Shape();
+        shape.graphics
+          .beginStroke("green")
+          .drawRect(rect.x, rect.y, rect.width, rect.height);
+        gameContainer.addChild(shape);
+      });
+    });
   }
 
   // 游戏开始

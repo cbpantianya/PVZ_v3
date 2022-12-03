@@ -39,6 +39,7 @@ function loadAssets() {
     },
     { src: "../assets/imgs/Cards/WallNut.png", id: "WallNutCard" },
     { src: "../assets/imgs/Plants/WallNut/WallNut.png", id: "WallNut" },
+    { src: "../assets/imgs/LawnMower.gif", id: "LawnMower" },
   ];
   var loader = new createjs.LoadQueue();
   loader.loadManifest(manifest);
@@ -60,16 +61,14 @@ function main() {
   window.stage.addChild(bgContainer);
   bgContainer.name = "bgContainer";
 
-
-
   // 新建容器，用于处理游戏UI
   var uiContainer = new createjs.Container();
   window.stage.addChild(uiContainer);
   uiContainer.name = "uiContainer";
 
   var plantContainer = new createjs.Container();
-    window.stage.addChild(plantContainer);  
-    plantContainer.name = "plantContainer";
+  window.stage.addChild(plantContainer);
+  plantContainer.name = "plantContainer";
 
   // 新建容器，用于处理游戏内容
   var gameContainer = new createjs.Container();
