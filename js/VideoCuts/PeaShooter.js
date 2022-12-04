@@ -7,6 +7,7 @@ class PeaShooter {
     this.__init__(x, y);
     this.blood = 6;
     this.waitBlood = 0;
+
   }
 
   __init__(x, y) {
@@ -423,9 +424,6 @@ class PeaShooterCard {
         .getChildByName("plantContainer")
         .getChildByName("vituralPeaShooter").y
     );
-    window.stage
-      .getChildByName("plantContainer")
-      .addChild(peaShooter.peaShooter);
     // 删除虚拟射手
     window.stage
       .getChildByName("plantContainer")

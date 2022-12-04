@@ -43,11 +43,15 @@ class GameData {
       } else if (nums == 1) {
         if (i == 0 || i == 1 || i == 3 || i == 4) {
           for (let j = 0; j < 9; j++) {
-            this.land[i].push(new LandUnit(j * 80, i * 80, 80, 80, 0, null));
+            this.land[i].push(
+              new LandUnit(j * 80 + 140, i * 100 + 80, 80, 100, 0, null, i)
+            );
           }
         } else {
           for (let j = 0; j < 9; j++) {
-            this.land[i].push(new LandUnit(j * 80, i * 80, 80, 80, 1, null));
+            this.land[i].push(
+              new LandUnit(j * 80 + 140, i * 100 + 80, 80, 100, 1, null, i)
+            );
           }
         }
       }

@@ -1,3 +1,4 @@
+import { Game001 } from "../Game001/Game001.js";
 import { GameAll } from "../GameAll/GameAll.js";
 
 class GameChoose {
@@ -48,7 +49,7 @@ class GameChoose {
     // 移除所有事件
     e.target.removeAllEventListeners();
     // 跳转场景
-    new GameAll();
+    new Game001();
   }
 }
 

@@ -15,6 +15,9 @@ class GameAll {
   }
 
   __init__() {
+    window.gameStep = 2;
+    window.stage.removeChild(window.stage.getChildByName("black"));
+    window.stage.removeChild(window.stage.getChildByName("text"));
     // 清除三容器
     var bgContainer = window.stage.getChildByName("bgContainer");
     bgContainer.removeAllChildren();
@@ -24,10 +27,18 @@ class GameAll {
 
     var gameContainer = window.stage.getChildByName("gameContainer");
     gameContainer.removeAllChildren();
+
+    console.log(gameContainer);
+
+    var plantContainer = window.stage.getChildByName("plantContainer");
+    plantContainer.removeAllChildren();
     // 绘制背景
     var bg = new createjs.Bitmap(window.loader.getResult("BG5S"));
     bg.x = -120;
     bgContainer.addChild(bg);
+
+    window.zombieList = null;
+    window.gameData = null;
 
     // 生成僵尸
     for (var i = 0; i < 10; i++) {
@@ -70,18 +81,18 @@ class GameAll {
       createjs.Ticker.addEventListener("tick", this.tick.bind(this));
     }, 1000);
 
-    // 绘制地皮
-    window.gameData.land.forEach((land) => {
-      // 添加矩形
-      land.forEach((rect) => {
-        // 新建矩形
-        var shape = new createjs.Shape();
-        shape.graphics
-          .beginStroke("green")
-          .drawRect(rect.x, rect.y, rect.width, rect.height);
-        gameContainer.addChild(shape);
-      });
-    });
+    // // 绘制地皮
+    // window.gameData.land.forEach((land) => {
+    //   // 添加矩形
+    //   land.forEach((rect) => {
+    //     // 新建矩形
+    //     var shape = new createjs.Shape();
+    //     shape.graphics
+    //       .beginStroke("green")
+    //       .drawRect(rect.x, rect.y, rect.width, rect.height);
+    //     gameContainer.addChild(shape);
+    //   });
+    // });
   }
 
   // 游戏开始
