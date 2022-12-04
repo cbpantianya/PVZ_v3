@@ -94,13 +94,10 @@ function main() {
     // 如果语句结束
     if (event.results[last].isFinal) {
       if (lastTranscript == "开始游戏") {
-        console.log("开始游戏");
         new GameChoose();
       } else if (lastTranscript == "返回") {
-        console.log("返回");
         new GameStart();
       } else if (lastTranscript == "开始冒险") {
-        console.log("开始冒险");
         new GameAll();
         speechRecognition.stop();
       }

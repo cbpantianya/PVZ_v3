@@ -51,7 +51,6 @@ class PeaShooter {
     if (this.waitBlood == 10) {
       this.waitBlood = 0;
       this.blood -= 1;
-      console.log("豌豆射手血量：" + this.blood);
     }
     this.waitBlood++;
   }
@@ -69,8 +68,6 @@ class PeaShooter {
           }
         });
       });
-      console.log(window.gameData.land);
-      console.log("豌豆射手死了");
       // 告诉附近的僵尸可以移动了
       window.zombieList.forEach((e) => {
         if (Math.abs(e.zombie.x - this.peaShooter.x) < 200) {
@@ -98,7 +95,6 @@ class PeaShooterCard {
       var last = event.results.length - 1;
       var lastTranscript = event.results[last][0].transcript;
       if (event.results[last].isFinal) {
-        console.log(lastTranscript);
         // 正则表达式
         const req =
           /在第[一二三四五12345]+行第[一二三四五六七八九123456789]+列[\u4e00-\u9fa5]+豌豆射手/;
@@ -172,7 +168,6 @@ class PeaShooterCard {
         const req2 =
           /在第[一二三四五12345]+行第[一二三四五六七八九123456789]+列[\u4e00-\u9fa5]+太阳花/;
         if (req2.test(lastTranscript)) {
-          console.log("太阳花");
           // 匹配行列
           const row = lastTranscript.match(/第[一二三四五12345]+行/);
           const col = lastTranscript.match(
@@ -284,7 +279,6 @@ class PeaShooterCard {
     card.addEventListener("click", this.click.bind(this));
     card.addEventListener("tick", this.tick.bind(this));
 
-    console.log(window.gameData.land);
     this.card = card;
 
     // 添加需要的太阳数量

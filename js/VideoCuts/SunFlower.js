@@ -39,7 +39,6 @@ class SunFlower {
   }
   bloodJ() {
     if (this.waitBlood == 10) {
-      console.log("血量减少");
       this.waitBlood = 0;
       this.blood -= 1;
     }
@@ -74,8 +73,6 @@ class SunFlower {
           }
         });
       });
-      console.log(window.gameData.land);
-      console.log("豌豆射手死了");
       // 告诉附近的僵尸可以移动了
       window.zombieList.forEach((e) => {
         if (Math.abs(e.zombie.x - this.peaShooter.x) < 200) {
@@ -106,7 +103,6 @@ class SunFlowerCard {
     card.addEventListener("click", this.click.bind(this));
     card.addEventListener("tick", this.tick.bind(this));
 
-    console.log(window.gameData.land);
     this.card = card;
 
     var text = new createjs.Text("50", "16px Arial", "#000000");
@@ -124,7 +120,6 @@ class SunFlowerCard {
       window.stage
         .getChildByName("uiContainer")
         .getChildByName("SunFlowerCard").alpha = 1;
-      //console.log("可以点击")
     } else {
       if (window.gameData.sun < 50) {
         window.stage

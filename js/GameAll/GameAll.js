@@ -47,7 +47,6 @@ class GameAll {
       // 调整位置
       zombie.zombie.x = 900 + zombie.colunm * -100 + Math.random() * 80;
       zombie.zombie.y = zombie.colunm * 100 + 20;
-      console.log(zombie.colunm);
       count++;
     });
 

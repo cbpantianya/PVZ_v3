@@ -72,8 +72,6 @@ class CherryBomb {
             }
           });
         });
-
-        console.log(window.gameData.land);
         setTimeout(function () {
           // 删除图片
           window.stage.getChildByName("plantContainer").removeChild(img);
@@ -126,8 +124,6 @@ class CherryBombCard {
     }
 
     card.addEventListener("tick", this.tick.bind(this));
-
-    console.log(window.gameData.land);
     this.card = card;
 
     var text = new createjs.Text("150", "16px Arial", "#000000");
@@ -145,7 +141,6 @@ class CherryBombCard {
       window.stage
         .getChildByName("uiContainer")
         .getChildByName("CherryBombCard").alpha = 1;
-      //console.log("可以点击")
     } else {
       if (window.gameData.sun < 150) {
         window.stage

@@ -19,7 +19,6 @@ class Car {
   tick() {
     // 监测附近僵尸，如果存在，卡车压死僵尸
     for (var i = 0; i < window.zombieList.length; i++) {
-      console.log(window.zombieList[i].zombie.x);
       if (
         this.car.x > window.zombieList[i].zombie.x + 70 &&
         this.car.x < window.zombieList[i].zombie.x + 166 &&

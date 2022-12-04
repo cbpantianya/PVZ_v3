@@ -66,7 +66,6 @@ class Zombie {
         window.stage.update();
         // 停止游戏
         createjs.Ticker.paused = true;
-        console.log("游戏失败");
       }
     }
 
