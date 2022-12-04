@@ -30,7 +30,7 @@ class GameAll {
     bgContainer.addChild(bg);
 
     // 生成僵尸
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < 10; i++) {
       this.zombieList.push(
         new Zombie(700 + Math.random() * 100 - 50, 100 + i * 50)
       );
@@ -43,7 +43,7 @@ class GameAll {
     // 播放完动画之后，给僵尸分配道次
     var count = 0;
     this.zombieList.forEach((zombie) => {
-      zombie.colunm = count;
+      zombie.colunm = count % 5;
       // 调整位置
       zombie.zombie.x = 900 + zombie.colunm * -100 + Math.random() * 80;
       zombie.zombie.y = zombie.colunm * 100 + 20;

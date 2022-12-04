@@ -39,6 +39,8 @@ function loadAssets() {
     },
     { src: "../assets/imgs/Cards/WallNut.png", id: "WallNutCard" },
     { src: "../assets/imgs/Plants/WallNut/WallNut.png", id: "WallNut" },
+    { src: "../assets/imgs/Plants/WallNut/WallNut1.png", id: "WallNut1" },
+    { src: "../assets/imgs/Plants/WallNut/WallNut2.png", id: "WallNut2" },
     { src: "../assets/imgs/LawnMower.gif", id: "LawnMower" },
   ];
   var loader = new createjs.LoadQueue();

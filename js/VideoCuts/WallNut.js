@@ -9,11 +9,15 @@ class WallNut {
   __init__(x, y) {
     // 生成射手
     var peaShooterSheet = new createjs.SpriteSheet({
-      images: [window.loader.getResult("WallNut")],
+      images: [
+        window.loader.getResult("WallNut"),
+        window.loader.getResult("WallNut1"),
+        window.loader.getResult("WallNut2"),
+      ],
       frames: {
         width: 65,
         height: 73,
-        count: 16,
+        count: 100,
         regX: 0,
         regY: 0,
         spacing: 0,
@@ -21,6 +25,8 @@ class WallNut {
       },
       animations: {
         shoot: [0, 15, "shoot", 0.5],
+        shoot1: [21, 31, "shoot1", 0.5],
+        shoot2: [42, 56, "shoot2", 0.5],
       },
     });
     this.peaShooter = new createjs.Sprite(peaShooterSheet, "shoot");
@@ -45,6 +51,11 @@ class WallNut {
       console.log("血量减少");
       this.waitBlood = 0;
       this.blood -= 1;
+      if (this.blood == 30) {
+        this.peaShooter.gotoAndPlay("shoot1");
+      } else if (this.blood == 10) {
+        this.peaShooter.gotoAndPlay("shoot2");
+      }
     }
     this.waitBlood++;
   }
