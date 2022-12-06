@@ -1,7 +1,5 @@
-import { GameData } from "./Storage/Storage.js";
 import { GameStart } from "./GameStart/GameStart.js";
 import { GameChoose } from "./GameChoose/GameChoose.js";
-import { GameAll } from "./GameAll/GameAll.js";
 import { Game001 } from "./Game001/Game001.js";
 
 function loadAssets() {

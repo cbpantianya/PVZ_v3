@@ -5,7 +5,6 @@ class GameStart {
   }
 
   __init__() {
-
     var div = document.createElement("div");
     var subdiv = document.createElement("div");
     subdiv.innerHTML = "开始游戏";

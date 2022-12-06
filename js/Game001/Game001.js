@@ -6,7 +6,6 @@ import { Car } from "../VideoCuts/Car.js";
 import { GameAll } from "../GameAll/GameAll.js";
 import { ShovelCard } from "../VideoCuts/Shovel.js";
 
-
 class Game001 {
   constructor() {
     this.zombieList = []; // 僵尸驻场列表
@@ -14,18 +13,17 @@ class Game001 {
   }
 
   __init__() {
-
-
     document.body.removeChild(document.getElementById("co-list"));
 
     var div = document.createElement("div");
     var subdiv = document.createElement("div");
-    subdiv.innerHTML = "<div>在第3行第n列种植豌豆射手</div><div>例如:在第3行第4列种植豌豆射手</div>";
+    subdiv.innerHTML =
+      "<div>在第3行第n列种植豌豆射手</div><div>例如:在第3行第4列种植豌豆射手</div>";
     div.appendChild(subdiv);
     div.id = "co-list";
     document.body.appendChild(div);
 
-
+    document.getElementById("steps").innerHTML = "当前关卡第1关,总共2关";
 
     window.gameStep = 1;
     // 清除三容器
@@ -164,19 +162,6 @@ class Game001 {
                     this.tick.bind(this)
                   );
                 }, 1000);
-
-                // 绘制地皮
-                // window.gameData.land.forEach((land) => {
-                //   // 添加矩形
-                //   land.forEach((rect) => {
-                //     // 新建矩形
-                //     var shape = new createjs.Shape();
-                //     shape.graphics
-                //       .beginStroke("green")
-                //       .drawRect(rect.x, rect.y, rect.width, rect.height);
-                //     gameContainer.addChild(shape);
-                //   });
-                // });
               }.bind(this)
             );
         }.bind(this)

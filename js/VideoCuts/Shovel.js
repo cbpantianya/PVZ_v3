@@ -28,11 +28,8 @@ class Shovel {
 
   click(e) {
     // 点击铲子
-    console.log(this.shovel.x, this.shovel.y);
     for (var i = 0; i < window.gameData.land.length; i++) {
-      console.log(window.gameData.land[i]);
       for (var j = 0; j < window.gameData.land[i].length; j++) {
-        console.log(window.gameData.land[i][j]);
         if (
           this.shovel.x > window.gameData.land[i][j].x + 10 &&
           this.shovel.x < window.gameData.land[i][j].x + 60 &&
@@ -40,7 +37,6 @@ class Shovel {
           this.shovel.y < window.gameData.land[i][j].y + 60
         ) {
           if (window.gameData.land[i][j].plant != null) {
-            console.log("铲子点击了植物");
             window.stage
               .getChildByName("plantContainer")
               .removeChild(window.gameData.land[i][j].plant.peaShooter);

@@ -19,7 +19,6 @@ class GameAll {
   }
 
   __init__() {
-
     document.body.removeChild(document.getElementById("co-list"));
 
     var div = document.createElement("div");
@@ -32,13 +31,15 @@ class GameAll {
       "坚果墙/双向日葵/机枪射手/双发射手",
       "______________________________",
       "移除第m行第n列的植物",
-    ]
+    ];
     list.forEach((item) => {
       subdiv.innerHTML += `<div>${item}</div>`;
-    })
+    });
     div.appendChild(subdiv);
     div.id = "co-list";
     document.body.appendChild(div);
+
+    document.getElementById("steps").innerHTML = "当前关卡第2关,总共2关";
 
     window.gameStep = 2;
     window.stage.removeChild(window.stage.getChildByName("black"));
@@ -79,10 +80,11 @@ class GameAll {
     this.zombieList.forEach((zombie) => {
       zombie.colunm = count % 5;
       // 调整位置
-      zombie.zombie.x = 900 + zombie.colunm * -100 + Math.random() * 80;
+      zombie.zombie.x = 900 + zombie.colunm * -80 + Math.random() * 200 + 200;
       zombie.zombie.y = zombie.colunm * 100 + 20;
       count++;
     });
+
 
     window.zombieList = this.zombieList;
 
@@ -102,7 +104,7 @@ class GameAll {
     window.gameData.cardList.push(twinSunflowerCard);
     window.gameData.cardList.push(gatlingPeaCard);
     window.gameData.cardList.push(repeaterCard);
-    
+
     new Car(100, 120);
     new Car(100, 220);
     new Car(100, 320);
@@ -124,19 +126,6 @@ class GameAll {
       // 开启tick
       createjs.Ticker.addEventListener("tick", this.tick.bind(this));
     }, 1000);
-
-    // // 绘制地皮
-    // window.gameData.land.forEach((land) => {
-    //   // 添加矩形
-    //   land.forEach((rect) => {
-    //     // 新建矩形
-    //     var shape = new createjs.Shape();
-    //     shape.graphics
-    //       .beginStroke("green")
-    //       .drawRect(rect.x, rect.y, rect.width, rect.height);
-    //     gameContainer.addChild(shape);
-    //   });
-    // });
   }
 
   // 游戏开始

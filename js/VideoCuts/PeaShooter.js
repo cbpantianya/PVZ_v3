@@ -5,8 +5,8 @@ import { SunFlower, SunFlowerCard } from "./SunFlower.js";
 import { CherryBomb } from "./CherryBomb.js";
 import { WallNut } from "./WallNut.js";
 import { TwinSunflower } from "./TwinSunflower.js";
-import { GatlingPeaCard, GatlingPea } from "./GatlingPea.js";
-import { RepeaterCard, Repeater } from "./Repeater.js";
+import { GatlingPea } from "./GatlingPea.js";
+import { Repeater } from "./Repeater.js";
 class PeaShooter {
   constructor(x, y) {
     this.__init__(x, y);
@@ -732,11 +732,11 @@ class PeaShooterCard {
         const req9 =
           /[\u4e00-\u9fa5]除第[一二三四五六七八九123456789]+行第[一二三四五六七八九123456789]+列[\u4e00-\u9fa5]/;
 
-          console.log(req9.test(lastTranscript));
-
         if (req9.test(lastTranscript)) {
           // 匹配行列
-          const row = lastTranscript.match(/第[一二三四五六七八九123456789]+行/);
+          const row = lastTranscript.match(
+            /第[一二三四五六七八九123456789]+行/
+          );
           const col = lastTranscript.match(
             /第[一二三四五六七八九123456789]+列/
           );
@@ -747,9 +747,10 @@ class PeaShooterCard {
           const land = window.gameData.land[rowNumber - 1][colNumber - 1];
           // 判断土地是否为空
           if (land.plant != null) {
-            console.log(land.plant);
             // 移除植物
-            window.stage.getChildByName("plantContainer").removeChild(land.plant.peaShooter);
+            window.stage
+              .getChildByName("plantContainer")
+              .removeChild(land.plant.peaShooter);
             land.plant = null;
             window.gameData.land[rowNumber - 1][colNumber - 1] = land;
           }
