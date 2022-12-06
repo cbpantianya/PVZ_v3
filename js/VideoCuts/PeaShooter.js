@@ -302,7 +302,6 @@ class PeaShooterCard {
 
   tick() {
     // 保持语音识别始终运行
-    console.log(window.speech);
 
     if (window.gameData.sun >= 100 && this.waitTime <= 0) {
       window.stage

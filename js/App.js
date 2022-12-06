@@ -48,6 +48,8 @@ function loadAssets() {
     { src: "../assets/imgs/Plants/WallNut/WallNut2.png", id: "WallNut2" },
     { src: "../assets/imgs/LawnMower.gif", id: "LawnMower" },
     { src: "../assets/sounds/MainBGM.mp3", id: "MainBGM" },
+    { src: "../assets/imgs/Shovel.png", id: "Shovel" },
+    { src: "../assets/imgs/ShovelBack.png", id: "ShovelBack" },
   ];
   var loader = new createjs.LoadQueue();
   loader.loadManifest(manifest);

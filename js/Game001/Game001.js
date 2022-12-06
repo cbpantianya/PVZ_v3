@@ -2,11 +2,9 @@ import { Zombie } from "../VideoCuts/Zombie.js";
 import { PeaShooterCard } from "../VideoCuts/PeaShooter.js";
 import { GameData } from "../Storage/Storage.js";
 import { SunBoard, Sun } from "../VideoCuts/Sun.js";
-import { SunFlowerCard } from "../VideoCuts/SunFlower.js";
-import { CherryBombCard } from "../VideoCuts/CherryBomb.js";
-import { WallNutCard } from "../VideoCuts/WallNut.js";
 import { Car } from "../VideoCuts/Car.js";
 import { GameAll } from "../GameAll/GameAll.js";
+import { ShovelCard } from "../VideoCuts/Shovel.js";
 
 class Game001 {
   constructor() {
@@ -43,7 +41,6 @@ class Game001 {
     }
 
     // 给他们加上动画
-    var ittt = 0;
     fakeZombies.forEach((zombie) => {
       createjs.Tween.get(zombie.zombie)
         .to({ x: 700 }, 1000)
@@ -142,6 +139,7 @@ class Game001 {
 
                 // 添加Card
                 var peaShooterCard = new PeaShooterCard(130, 0);
+                var shovel = new ShovelCard();
                 var sunBoard = new SunBoard(0, 0);
                 new Car(100, 320);
 
@@ -155,17 +153,17 @@ class Game001 {
                 }, 1000);
 
                 // 绘制地皮
-                window.gameData.land.forEach((land) => {
-                  // 添加矩形
-                  land.forEach((rect) => {
-                    // 新建矩形
-                    var shape = new createjs.Shape();
-                    shape.graphics
-                      .beginStroke("green")
-                      .drawRect(rect.x, rect.y, rect.width, rect.height);
-                    gameContainer.addChild(shape);
-                  });
-                });
+                // window.gameData.land.forEach((land) => {
+                //   // 添加矩形
+                //   land.forEach((rect) => {
+                //     // 新建矩形
+                //     var shape = new createjs.Shape();
+                //     shape.graphics
+                //       .beginStroke("green")
+                //       .drawRect(rect.x, rect.y, rect.width, rect.height);
+                //     gameContainer.addChild(shape);
+                //   });
+                // });
               }.bind(this)
             );
         }.bind(this)
@@ -185,7 +183,11 @@ class Game001 {
       black.alpha = 0;
       stage.addChild(black);
       // 文字
-      var text = new createjs.Text("正在转移到下一关", "bold 50px Arial", "#fff");
+      var text = new createjs.Text(
+        "正在转移到下一关",
+        "bold 50px Arial",
+        "#fff"
+      );
       text.x = 300;
       text.y = 300;
       text.name = "text";

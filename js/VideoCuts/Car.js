@@ -27,10 +27,10 @@ class Car {
         window.zombieList[i].blood != 0
       ) {
         // 向右开车
-        createjs.Tween.get(this.car).to({ x: 2000 }, 1000)
+        createjs.Tween.get(this.car).to({ x: 2000 }, 3000);
         // 僵尸死亡
         window.zombieList[i].blood = 0;
-        window.zombieList[i].moveS = -3
+        window.zombieList[i].moveS = -3;
         window.zombieList[i].zombie.gotoAndPlay("die");
         window.zombieList[i].zombie.addEventListener(
           "animationend",

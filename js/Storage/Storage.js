@@ -9,7 +9,7 @@ class GameData {
   __init__() {
     this.level = 1; // 当前关卡
     this.land = []; // 地图数据
-    this.sun = 100; // 当前阳光数
+    this.sun = 3000; // 当前阳光数
     this.sunOnland = 0;
     this.plantInhand = false;
   }

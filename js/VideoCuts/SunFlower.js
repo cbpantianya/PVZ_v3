@@ -65,7 +65,9 @@ class SunFlower {
       this.peaShooter.alpha = 0.5;
       // 移除监听并销毁自己
       this.peaShooter.removeEventListener("tick", this.tick.bind(this));
-      window.stage.getChildByName("plantContainer").removeChild(this.peaShooter);
+      window.stage
+        .getChildByName("plantContainer")
+        .removeChild(this.peaShooter);
       window.gameData.land.forEach((e) => {
         e.forEach((e) => {
           if (e.plant == this) {

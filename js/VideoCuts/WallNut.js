@@ -43,7 +43,6 @@ class WallNut {
     this.waitAttack = 0;
     // 血量监测
     this.peaShooter.addEventListener("tick", this.tick.bind(this));
-
   }
   bloodJ() {
     if (this.waitBlood == 10) {
