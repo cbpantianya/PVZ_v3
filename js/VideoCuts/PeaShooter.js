@@ -1,7 +1,8 @@
 // 豌豆射手的影片剪辑
 // 包括卡片和射手本身
 import { PB1 } from "./PB1.js";
-import { SunFlower } from "./SunFlower.js";
+import { SunFlower, SunFlowerCard } from "./SunFlower.js";
+import { CherryBomb } from "./CherryBomb.js";
 class PeaShooter {
   constructor(x, y) {
     this.__init__(x, y);
@@ -87,6 +88,7 @@ class PeaShooterCard {
     this.__plantInHand__ = false;
     this.waitTime = 0;
     var speechRecognition = new webkitSpeechRecognition();
+    this.SpecialTime = false; //防抖
 
     speechRecognition.continuous = true;
     speechRecognition.interimResults = true;
@@ -175,7 +177,7 @@ class PeaShooterCard {
           }
         }
         const req2 =
-          /在第[一二三四五12345]+行第[一二三四五六七八九123456789]+列[\u4e00-\u9fa5]+太阳花/;
+          /在第[一二三四五12345]+行第[一二三四五六七八九123456789]+列[\u4e00-\u9fa5]+向日葵/;
         if (req2.test(lastTranscript)) {
           // 匹配行列
           const row = lastTranscript.match(/第[一二三四五12345]+行/);
@@ -204,10 +206,7 @@ class PeaShooterCard {
               .getChildByName("uiContainer")
               .getChildByName("SunFlowerCard")
               .removeAllEventListeners();
-            window.stage
-              .getChildByName("uiContainer")
-              .getChildByName("SunFlowerCard")
-              .addEventListener("tick", this.tick.bind(this));
+            
             window.stage
               .getChildByName("uiContainer")
               .getChildByName("SunFlowerCard").alpha = 0.5;
@@ -223,7 +222,7 @@ class PeaShooterCard {
               window.stage
                 .getChildByName("uiContainer")
                 .getChildByName("SunFlowerCard").y + 25;
-            window.stage.getChildByName("uiContainer").addChild(timeText);
+            window.stage.getChildByName("uiContainer").addChild(timeText); 
             var timer = setInterval(
               function () {
                 time--;
@@ -237,7 +236,11 @@ class PeaShooterCard {
                     window.stage
                       .getChildByName("uiContainer")
                       .getChildByName("SunFlowerCard")
-                      .addEventListener("click", this.click.bind(this));
+                      .addEventListener(
+                        "click",
+                        window.gameData.cardList[1].click.bind(window.gameData.cardList[1])
+                      );
+
                     window.stage
                       .getChildByName("uiContainer")
                       .getChildByName("SunFlowerCard").alpha = 1;
@@ -271,6 +274,87 @@ class PeaShooterCard {
                   .getChildByName("gameContainer")
                   .getChildByName("sun")
               );
+          }
+        }
+
+        
+
+        const req4 =
+          /在第[一二三四五12345]+行第[一二三四五六七八九123456789]+列[\u4e00-\u9fa5]+樱桃+[\u4e00-\u9fa5]/;
+        if (req4.test(lastTranscript) && this.SpecialTime == false && window.gameData.cardList[2].waitTime == 0) {
+          this.SpecialTime = true;
+          setTimeout(function () {
+            this.SpecialTime = false;
+          }.bind(this), 6000);
+          // 匹配行列
+          const row = lastTranscript.match(/第[一二三四五12345]+行/);
+          const col = lastTranscript.match(
+            /第[一二三四五六七八九123456789]+列/
+          );
+          // 转换为数字
+          const rowNumber = row[0].match(/[一二三四五12345]+/)[0];
+          const colNumber = col[0].match(/[一二三四五六七八九123456789]+/)[0];
+          // 找到对应的土地
+          const land = window.gameData.land[rowNumber - 1][colNumber - 1];
+          // 判断土地是否为空
+          if (land.plant == null) {
+            // 种植
+            land.plant = new CherryBomb(
+              land.x + land.width / 2,
+              land.y + land.height / 2
+            );
+            window.gameData.land[rowNumber - 1][colNumber - 1] = land;
+
+            land.plant.startBomb();
+
+            window.gameData.sun -= 150;
+            window.stage
+              .getChildByName("uiContainer")
+              .getChildByName("sunNumber").text = window.gameData.sun;
+            // 禁用卡片
+            window.stage
+              .getChildByName("uiContainer")
+              .getChildByName("CherryBombCard")
+              .removeAllEventListeners();
+            window.stage
+              .getChildByName("uiContainer")
+              .getChildByName("CherryBombCard").alpha = 0.5;
+            // 添加倒计时
+            var time = 10;
+            this.waitTime = 60;
+            var timeText = new createjs.Text(time, "20px Arial", "#000");
+            timeText.x =
+              window.stage
+                .getChildByName("uiContainer")
+                .getChildByName("CherryBombCard").x + 40;
+            timeText.y =
+              window.stage
+                .getChildByName("uiContainer")
+                .getChildByName("CherryBombCard").y + 25;
+            window.stage.getChildByName("uiContainer").addChild(timeText);
+            var timer = setInterval(
+              function () {
+                time--;
+                timeText.text = time;
+                if (time == 0) {
+                  clearInterval(timer);
+                  window.stage
+                    .getChildByName("uiContainer")
+                    .removeChild(timeText);
+                  if (window.gameData.sun >= 150) {
+                    window.stage
+                      .getChildByName("uiContainer")
+                      .getChildByName("CherryBombCard")
+                      .addEventListener("click", window.gameData.cardList[2].click.bind(window.gameData.cardList[2]));
+                    window.stage
+                      .getChildByName("uiContainer")
+                      .getChildByName("CherryBombCard").alpha = 1;
+                  }
+                  this.waitTime = 0;
+                }
+              }.bind(this),
+              600
+            );
           }
         }
       }

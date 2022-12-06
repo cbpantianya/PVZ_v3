@@ -12,6 +12,7 @@ class GameData {
     this.sun = 3000; // 当前阳光数
     this.sunOnland = 0;
     this.plantInhand = false;
+    this.cardList = []; // 卡片列表
   }
 
   // 重置游戏数据

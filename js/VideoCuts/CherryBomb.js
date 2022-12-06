@@ -343,4 +343,4 @@ class CherryBombCard {
   }
 }
 
-export { CherryBombCard };
+export { CherryBombCard, CherryBomb };

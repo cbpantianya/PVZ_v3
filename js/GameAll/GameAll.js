@@ -97,6 +97,14 @@ class GameAll {
     var twinSunflowerCard = new TwinSunflowerCard(530, 0);
     var gatlingPeaCard = new GatlingPeaCard(630, 0);
     var repeaterCard = new RepeaterCard(730, 0);
+    window.gameData.cardList.push(peaShooterCard);
+    window.gameData.cardList.push(sunFlowerCard);
+    window.gameData.cardList.push(cherryBombCard);
+    window.gameData.cardList.push(wallNutCard);
+    window.gameData.cardList.push(twinSunflowerCard);
+    window.gameData.cardList.push(gatlingPeaCard);
+    window.gameData.cardList.push(repeaterCard);
+    
     new Car(100, 120);
     new Car(100, 220);
     new Car(100, 320);
