@@ -312,4 +312,4 @@ class GatlingPeaCard {
   }
 }
 
-export { GatlingPeaCard };
+export { GatlingPeaCard, GatlingPea };

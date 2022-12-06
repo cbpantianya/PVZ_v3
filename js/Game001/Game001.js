@@ -189,7 +189,6 @@ class Game001 {
     if (this.zombieList.length == 0 && window.gameStep == 1) {
       window.gameStep = 2;
       //黑屏一下
-      console.log("游戏结束");
       var black = new createjs.Shape();
       black.graphics.beginFill("#000").drawRect(0, 0, 950, 750);
       black.name = "black";

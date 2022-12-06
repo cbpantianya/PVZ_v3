@@ -3,6 +3,10 @@
 import { PB1 } from "./PB1.js";
 import { SunFlower, SunFlowerCard } from "./SunFlower.js";
 import { CherryBomb } from "./CherryBomb.js";
+import { WallNut } from "./WallNut.js";
+import { TwinSunflower } from "./TwinSunflower.js";
+import { GatlingPeaCard, GatlingPea } from "./GatlingPea.js";
+import { RepeaterCard, Repeater } from "./Repeater.js";
 class PeaShooter {
   constructor(x, y) {
     this.__init__(x, y);
@@ -176,6 +180,96 @@ class PeaShooterCard {
             );
           }
         }
+
+        const req6 =
+          /在第[一二三四五12345]+行第[一二三四五六七八九123456789]+列[\u4e00-\u9fa5]+双向日葵/;
+        if (
+          req6.test(lastTranscript) &&
+          this.SpecialTime == false &&
+          window.gameData.cardList[4].waitTime == 0
+        ) {
+          this.SpecialTime = true;
+          setTimeout(
+            function () {
+              this.SpecialTime = false;
+            }.bind(this),
+            6000
+          );
+          // 匹配行列
+          const row = lastTranscript.match(/第[一二三四五12345]+行/);
+          const col = lastTranscript.match(
+            /第[一二三四五六七八九123456789]+列/
+          );
+          // 转换为数字
+          const rowNumber = row[0].match(/[一二三四五12345]+/)[0];
+          const colNumber = col[0].match(/[一二三四五六七八九123456789]+/)[0];
+          // 找到对应的土地
+          const land = window.gameData.land[rowNumber - 1][colNumber - 1];
+          // 判断土地是否为空
+          if (land.plant == null) {
+            // 种植
+            land.plant = new TwinSunflower(
+              land.x + land.width / 2,
+              land.y + land.height / 2
+            );
+            window.gameData.land[rowNumber - 1][colNumber - 1] = land;
+            window.gameData.sun -= 50;
+            window.stage
+              .getChildByName("uiContainer")
+              .getChildByName("sunNumber").text = window.gameData.sun;
+            // 禁用卡片
+            window.stage
+              .getChildByName("uiContainer")
+              .getChildByName("TwinSunflowerCard")
+              .removeAllEventListeners();
+            window.stage
+              .getChildByName("uiContainer")
+              .getChildByName("TwinSunflowerCard").alpha = 0.5;
+            // 添加倒计时
+            var time = 10;
+            this.waitTime = 60;
+            var timeText = new createjs.Text(time, "20px Arial", "#000");
+            timeText.x =
+              window.stage
+                .getChildByName("uiContainer")
+                .getChildByName("TwinSunflowerCard").x + 40;
+            timeText.y =
+              window.stage
+                .getChildByName("uiContainer")
+                .getChildByName("TwinSunflowerCard").y + 25;
+            window.stage.getChildByName("uiContainer").addChild(timeText);
+            var timer = setInterval(
+              function () {
+                time--;
+                timeText.text = time;
+                if (time == 0) {
+                  clearInterval(timer);
+                  window.stage
+                    .getChildByName("uiContainer")
+                    .removeChild(timeText);
+                  if (window.gameData.sun >= 50) {
+                    window.stage
+                      .getChildByName("uiContainer")
+                      .getChildByName("TwinSunflowerCard")
+                      .addEventListener(
+                        "click",
+                        window.gameData.cardList[4].click.bind(
+                          window.gameData.cardList[4]
+                        )
+                      );
+                    window.stage
+                      .getChildByName("uiContainer")
+                      .getChildByName("TwinSunflowerCard").alpha = 1;
+                  }
+                  this.waitTime = 0;
+                }
+              }.bind(this),
+              600
+            );
+          }
+
+          return;
+        }
         const req2 =
           /在第[一二三四五12345]+行第[一二三四五六七八九123456789]+列[\u4e00-\u9fa5]+向日葵/;
         if (req2.test(lastTranscript)) {
@@ -206,7 +300,7 @@ class PeaShooterCard {
               .getChildByName("uiContainer")
               .getChildByName("SunFlowerCard")
               .removeAllEventListeners();
-            
+
             window.stage
               .getChildByName("uiContainer")
               .getChildByName("SunFlowerCard").alpha = 0.5;
@@ -222,7 +316,7 @@ class PeaShooterCard {
               window.stage
                 .getChildByName("uiContainer")
                 .getChildByName("SunFlowerCard").y + 25;
-            window.stage.getChildByName("uiContainer").addChild(timeText); 
+            window.stage.getChildByName("uiContainer").addChild(timeText);
             var timer = setInterval(
               function () {
                 time--;
@@ -238,7 +332,9 @@ class PeaShooterCard {
                       .getChildByName("SunFlowerCard")
                       .addEventListener(
                         "click",
-                        window.gameData.cardList[1].click.bind(window.gameData.cardList[1])
+                        window.gameData.cardList[1].click.bind(
+                          window.gameData.cardList[1]
+                        )
                       );
 
                     window.stage
@@ -277,15 +373,20 @@ class PeaShooterCard {
           }
         }
 
-        
-
         const req4 =
           /在第[一二三四五12345]+行第[一二三四五六七八九123456789]+列[\u4e00-\u9fa5]+樱桃+[\u4e00-\u9fa5]/;
-        if (req4.test(lastTranscript) && this.SpecialTime == false && window.gameData.cardList[2].waitTime == 0) {
+        if (
+          req4.test(lastTranscript) &&
+          this.SpecialTime == false &&
+          window.gameData.cardList[2].waitTime == 0
+        ) {
           this.SpecialTime = true;
-          setTimeout(function () {
-            this.SpecialTime = false;
-          }.bind(this), 6000);
+          setTimeout(
+            function () {
+              this.SpecialTime = false;
+            }.bind(this),
+            6000
+          );
           // 匹配行列
           const row = lastTranscript.match(/第[一二三四五12345]+行/);
           const col = lastTranscript.match(
@@ -345,7 +446,12 @@ class PeaShooterCard {
                     window.stage
                       .getChildByName("uiContainer")
                       .getChildByName("CherryBombCard")
-                      .addEventListener("click", window.gameData.cardList[2].click.bind(window.gameData.cardList[2]));
+                      .addEventListener(
+                        "click",
+                        window.gameData.cardList[2].click.bind(
+                          window.gameData.cardList[2]
+                        )
+                      );
                     window.stage
                       .getChildByName("uiContainer")
                       .getChildByName("CherryBombCard").alpha = 1;
@@ -355,6 +461,297 @@ class PeaShooterCard {
               }.bind(this),
               600
             );
+          }
+        }
+
+        const req5 =
+          /在第[一二三四五12345]+行第[一二三四五六七八九123456789]+列[\u4e00-\u9fa5]+坚果/;
+        if (
+          req5.test(lastTranscript) &&
+          this.SpecialTime == false &&
+          window.gameData.cardList[3].waitTime == 0
+        ) {
+          this.SpecialTime = true;
+          setTimeout(
+            function () {
+              this.SpecialTime = false;
+            }.bind(this),
+            6000
+          );
+          // 匹配行列
+          const row = lastTranscript.match(/第[一二三四五12345]+行/);
+          const col = lastTranscript.match(
+            /第[一二三四五六七八九123456789]+列/
+          );
+          // 转换为数字
+          const rowNumber = row[0].match(/[一二三四五12345]+/)[0];
+          const colNumber = col[0].match(/[一二三四五六七八九123456789]+/)[0];
+          // 找到对应的土地
+          const land = window.gameData.land[rowNumber - 1][colNumber - 1];
+          // 判断土地是否为空
+          if (land.plant == null) {
+            // 种植
+            land.plant = new WallNut(
+              land.x + land.width / 2,
+              land.y + land.height / 2
+            );
+            window.gameData.land[rowNumber - 1][colNumber - 1] = land;
+            window.gameData.sun -= 50;
+            window.stage
+              .getChildByName("uiContainer")
+              .getChildByName("sunNumber").text = window.gameData.sun;
+            // 禁用卡片
+            window.stage
+              .getChildByName("uiContainer")
+              .getChildByName("WallNutCard")
+              .removeAllEventListeners();
+            window.stage
+              .getChildByName("uiContainer")
+              .getChildByName("WallNutCard").alpha = 0.5;
+            // 添加倒计时
+            var time = 10;
+            this.waitTime = 60;
+            var timeText = new createjs.Text(time, "20px Arial", "#000");
+            timeText.x =
+              window.stage
+                .getChildByName("uiContainer")
+                .getChildByName("WallNutCard").x + 40;
+            timeText.y =
+              window.stage
+                .getChildByName("uiContainer")
+                .getChildByName("WallNutCard").y + 25;
+            window.stage.getChildByName("uiContainer").addChild(timeText);
+            var timer = setInterval(
+              function () {
+                time--;
+                timeText.text = time;
+                if (time == 0) {
+                  clearInterval(timer);
+                  window.stage
+                    .getChildByName("uiContainer")
+                    .removeChild(timeText);
+                  if (window.gameData.sun >= 50) {
+                    window.stage
+                      .getChildByName("uiContainer")
+                      .getChildByName("WallNutCard")
+                      .addEventListener(
+                        "click",
+                        window.gameData.cardList[3].click.bind(
+                          window.gameData.cardList[3]
+                        )
+                      );
+                    window.stage
+                      .getChildByName("uiContainer")
+                      .getChildByName("WallNutCard").alpha = 1;
+                  }
+                  this.waitTime = 0;
+                }
+              }.bind(this),
+              600
+            );
+          }
+        }
+
+        const req7 =
+          /在第[一二三四五12345]+行第[一二三四五六七八九123456789]+列[\u4e00-\u9fa5]+机枪射手/;
+        if (
+          req7.test(lastTranscript) &&
+          this.SpecialTime == false &&
+          window.gameData.cardList[4].waitTime == 0
+        ) {
+          this.SpecialTime = true;
+          setTimeout(
+            function () {
+              this.SpecialTime = false;
+            }.bind(this),
+            6000
+          );
+          // 匹配行列
+          const row = lastTranscript.match(/第[一二三四五12345]+行/);
+          const col = lastTranscript.match(
+            /第[一二三四五六七八九123456789]+列/
+          );
+          // 转换为数字
+          const rowNumber = row[0].match(/[一二三四五12345]+/)[0];
+          const colNumber = col[0].match(/[一二三四五六七八九123456789]+/)[0];
+          // 找到对应的土地
+          const land = window.gameData.land[rowNumber - 1][colNumber - 1];
+          // 判断土地是否为空
+          if (land.plant == null) {
+            // 种植
+            land.plant = new GatlingPea(
+              land.x + land.width / 2,
+              land.y + land.height / 2
+            );
+            window.gameData.land[rowNumber - 1][colNumber - 1] = land;
+            window.gameData.sun -= 100;
+            window.stage
+              .getChildByName("uiContainer")
+              .getChildByName("sunNumber").text = window.gameData.sun;
+            // 禁用卡片
+            window.stage
+              .getChildByName("uiContainer")
+              .getChildByName("GatlingPeaCard")
+              .removeAllEventListeners();
+            window.stage
+              .getChildByName("uiContainer")
+              .getChildByName("GatlingPeaCard").alpha = 0.5;
+            // 添加倒计时
+            var time = 10;
+            this.waitTime = 60;
+            var timeText = new createjs.Text(time, "20px Arial", "#000");
+            timeText.x =
+              window.stage
+                .getChildByName("uiContainer")
+                .getChildByName("GatlingPeaCard").x + 40;
+            timeText.y =
+              window.stage
+                .getChildByName("uiContainer")
+                .getChildByName("GatlingPeaCard").y + 25;
+            window.stage.getChildByName("uiContainer").addChild(timeText);
+            var timer = setInterval(
+              function () {
+                time--;
+                timeText.text = time;
+                if (time == 0) {
+                  clearInterval(timer);
+                  window.stage
+                    .getChildByName("uiContainer")
+                    .removeChild(timeText);
+                  if (window.gameData.sun >= 100) {
+                    window.stage
+                      .getChildByName("uiContainer")
+                      .getChildByName("GatlingPeaCard")
+                      .addEventListener(
+                        "click",
+                        window.gameData.cardList[4].click.bind(
+                          window.gameData.cardList[4]
+                        )
+                      );
+                    window.stage
+                      .getChildByName("uiContainer")
+                      .getChildByName("GatlingPeaCard").alpha = 1;
+                  }
+                  this.waitTime = 0;
+                }
+              }.bind(this),
+              600
+            );
+          }
+        }
+
+        const req8 =
+          /在第[一二三四五12345]+行第[一二三四五六七八九123456789]+列[\u4e00-\u9fa5]+双发射手/;
+        if (
+          req8.test(lastTranscript) &&
+          this.SpecialTime == false &&
+          window.gameData.cardList[5].waitTime == 0
+        ) {
+          this.SpecialTime = true;
+          setTimeout(
+            function () {
+              this.SpecialTime = false;
+            }.bind(this),
+            6000
+          );
+          // 匹配行列
+          const row = lastTranscript.match(/第[一二三四五12345]+行/);
+          const col = lastTranscript.match(
+            /第[一二三四五六七八九123456789]+列/
+          );
+          // 转换为数字
+          const rowNumber = row[0].match(/[一二三四五12345]+/)[0];
+          const colNumber = col[0].match(/[一二三四五六七八九123456789]+/)[0];
+          // 找到对应的土地
+          const land = window.gameData.land[rowNumber - 1][colNumber - 1];
+          // 判断土地是否为空
+          if (land.plant == null) {
+            // 种植
+            land.plant = new Repeater(
+              land.x + land.width / 2,
+              land.y + land.height / 2
+            );
+            window.gameData.land[rowNumber - 1][colNumber - 1] = land;
+            window.gameData.sun -= 175;
+            window.stage
+              .getChildByName("uiContainer")
+              .getChildByName("sunNumber").text = window.gameData.sun;
+            // 禁用卡片
+            window.stage
+              .getChildByName("uiContainer")
+              .getChildByName("RepeaterCard")
+              .removeAllEventListeners();
+            window.stage
+              .getChildByName("uiContainer")
+              .getChildByName("RepeaterCard").alpha = 0.5;
+            // 添加倒计时
+            var time = 10;
+            this.waitTime = 60;
+            var timeText = new createjs.Text(time, "20px Arial", "#000");
+            timeText.x =
+              window.stage
+                .getChildByName("uiContainer")
+                .getChildByName("RepeaterCard").x + 40;
+            timeText.y =
+              window.stage
+                .getChildByName("uiContainer")
+                .getChildByName("RepeaterCard").y + 25;
+            window.stage.getChildByName("uiContainer").addChild(timeText);
+            var timer = setInterval(
+              function () {
+                time--;
+                timeText.text = time;
+                if (time == 0) {
+                  clearInterval(timer);
+                  window.stage
+                    .getChildByName("uiContainer")
+                    .removeChild(timeText);
+                  if (window.gameData.sun >= 175) {
+                    window.stage
+                      .getChildByName("uiContainer")
+                      .getChildByName("RepeaterCard")
+                      .addEventListener(
+                        "click",
+                        window.gameData.cardList[5].click.bind(
+                          window.gameData.cardList[5]
+                        )
+                      );
+                    window.stage
+                      .getChildByName("uiContainer")
+                      .getChildByName("RepeaterCard").alpha = 1;
+                  }
+                  this.waitTime = 0;
+                }
+              }.bind(this),
+              600
+            );
+          }
+        }
+
+        // 铲除植物
+        const req9 =
+          /[\u4e00-\u9fa5]除第[一二三四五六七八九123456789]+行第[一二三四五六七八九123456789]+列[\u4e00-\u9fa5]/;
+
+          console.log(req9.test(lastTranscript));
+
+        if (req9.test(lastTranscript)) {
+          // 匹配行列
+          const row = lastTranscript.match(/第[一二三四五六七八九123456789]+行/);
+          const col = lastTranscript.match(
+            /第[一二三四五六七八九123456789]+列/
+          );
+          // 转换为数字
+          const rowNumber = row[0].match(/[一二三四五六七八九123456789]+/)[0];
+          const colNumber = col[0].match(/[一二三四五六七八九123456789]+/)[0];
+          // 找到对应的土地
+          const land = window.gameData.land[rowNumber - 1][colNumber - 1];
+          // 判断土地是否为空
+          if (land.plant != null) {
+            console.log(land.plant);
+            // 移除植物
+            window.stage.getChildByName("plantContainer").removeChild(land.plant.peaShooter);
+            land.plant = null;
+            window.gameData.land[rowNumber - 1][colNumber - 1] = land;
           }
         }
       }

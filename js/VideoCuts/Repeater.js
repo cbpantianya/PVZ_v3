@@ -311,4 +311,4 @@ class RepeaterCard {
   }
 }
 
-export { RepeaterCard };
+export { RepeaterCard, Repeater };

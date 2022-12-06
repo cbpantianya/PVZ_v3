@@ -29,9 +29,9 @@ class GameAll {
       "1<=m<=5且1<=n<=9",
       "****为植物名称",
       "植物名称：豌豆射手/向日葵/樱桃炸弹",
-      "坚果墙/双向日葵/高射豌豆/双发射手",
+      "坚果墙/双向日葵/机枪射手/双发射手",
       "______________________________",
-      "在第m行第n列移除植物",
+      "移除第m行第n列的植物",
     ]
     list.forEach((item) => {
       subdiv.innerHTML += `<div>${item}</div>`;
@@ -52,8 +52,6 @@ class GameAll {
 
     var gameContainer = window.stage.getChildByName("gameContainer");
     gameContainer.removeAllChildren();
-
-    console.log(gameContainer);
 
     var plantContainer = window.stage.getChildByName("plantContainer");
     plantContainer.removeAllChildren();
