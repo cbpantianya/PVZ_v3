@@ -2,7 +2,7 @@ import { Sun } from "../VideoCuts/Sun.js";
 
 class SunFlower {
   constructor(x, y) {
-    this.blood = 6;
+    this.blood = 9;
     this.waitBlood = 0;
     this.waitSun = 500;
 

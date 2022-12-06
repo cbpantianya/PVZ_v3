@@ -1,7 +1,7 @@
 import { Sun } from "./Sun.js";
 class TwinSunflower {
   constructor(x, y) {
-    this.blood = 6;
+    this.blood = 9;
     this.waitBlood = 0;
     this.waitSun = 300;
 
@@ -114,14 +114,14 @@ class TwinSunflowerCard {
 
     this.card = card;
 
-    var text = new createjs.Text("50", "16px Arial", "#000000");
+    var text = new createjs.Text("150", "16px Arial", "#000000");
     text.x = x + 65;
     text.y = y + 45;
     window.stage.getChildByName("plantContainer").addChild(text);
   }
 
   tick() {
-    if (window.gameData.sun >= 50 && this.waitTime <= 0) {
+    if (window.gameData.sun >= 150 && this.waitTime <= 0) {
       window.stage
         .getChildByName("uiContainer")
         .getChildByName("TwinSunflowerCard")
@@ -130,7 +130,7 @@ class TwinSunflowerCard {
         .getChildByName("uiContainer")
         .getChildByName("TwinSunflowerCard").alpha = 1;
     } else {
-      if (window.gameData.sun < 50) {
+      if (window.gameData.sun < 150) {
         window.stage
           .getChildByName("uiContainer")
           .getChildByName("TwinSunflowerCard")
@@ -282,7 +282,7 @@ class TwinSunflowerCard {
       }
     }
 
-    window.gameData.sun -= 50;
+    window.gameData.sun -= 150;
     window.stage
       .getChildByName("uiContainer")
       .getChildByName("sunNumber").text = window.gameData.sun;
@@ -312,7 +312,7 @@ class TwinSunflowerCard {
         if (time == 0) {
           clearInterval(timer);
           window.stage.getChildByName("uiContainer").removeChild(timeText);
-          if (window.gameData.sun >= 50) {
+          if (window.gameData.sun >= 150) {
             window.stage
               .getChildByName("uiContainer")
               .getChildByName("TwinSunflowerCard")

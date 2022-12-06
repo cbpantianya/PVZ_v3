@@ -1,6 +1,6 @@
 class CherryBomb {
   constructor(x, y) {
-    this.blood = 6;
+    this.blood = 9;
     this.waitBlood = 0;
 
     this.__init__(x, y);
@@ -313,7 +313,7 @@ class CherryBombCard {
       .getChildByName("uiContainer")
       .getChildByName("CherryBombCard").alpha = 0.5;
     // 添加倒计时
-    var time = 10;
+    var time = 20;
     this.waitTime = 60;
     var timeText = new createjs.Text(time, "20px Arial", "#000");
     timeText.x = this.card.x + 40;

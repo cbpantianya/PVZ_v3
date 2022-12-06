@@ -10,7 +10,7 @@ import { RepeaterCard, Repeater } from "./Repeater.js";
 class PeaShooter {
   constructor(x, y) {
     this.__init__(x, y);
-    this.blood = 6;
+    this.blood = 9;
     this.waitBlood = 0;
   }
 
@@ -213,7 +213,7 @@ class PeaShooterCard {
               land.y + land.height / 2
             );
             window.gameData.land[rowNumber - 1][colNumber - 1] = land;
-            window.gameData.sun -= 50;
+            window.gameData.sun -= 150;
             window.stage
               .getChildByName("uiContainer")
               .getChildByName("sunNumber").text = window.gameData.sun;
@@ -247,7 +247,7 @@ class PeaShooterCard {
                   window.stage
                     .getChildByName("uiContainer")
                     .removeChild(timeText);
-                  if (window.gameData.sun >= 50) {
+                  if (window.gameData.sun >= 150) {
                     window.stage
                       .getChildByName("uiContainer")
                       .getChildByName("TwinSunflowerCard")
@@ -421,7 +421,7 @@ class PeaShooterCard {
               .getChildByName("uiContainer")
               .getChildByName("CherryBombCard").alpha = 0.5;
             // 添加倒计时
-            var time = 10;
+            var time = 20;
             this.waitTime = 60;
             var timeText = new createjs.Text(time, "20px Arial", "#000");
             timeText.x =
@@ -509,7 +509,7 @@ class PeaShooterCard {
               .getChildByName("uiContainer")
               .getChildByName("WallNutCard").alpha = 0.5;
             // 添加倒计时
-            var time = 10;
+            var time = 25;
             this.waitTime = 60;
             var timeText = new createjs.Text(time, "20px Arial", "#000");
             timeText.x =
@@ -584,7 +584,7 @@ class PeaShooterCard {
               land.y + land.height / 2
             );
             window.gameData.land[rowNumber - 1][colNumber - 1] = land;
-            window.gameData.sun -= 100;
+            window.gameData.sun -= 250;
             window.stage
               .getChildByName("uiContainer")
               .getChildByName("sunNumber").text = window.gameData.sun;
@@ -618,7 +618,7 @@ class PeaShooterCard {
                   window.stage
                     .getChildByName("uiContainer")
                     .removeChild(timeText);
-                  if (window.gameData.sun >= 100) {
+                  if (window.gameData.sun >= 250) {
                     window.stage
                       .getChildByName("uiContainer")
                       .getChildByName("GatlingPeaCard")
@@ -672,7 +672,7 @@ class PeaShooterCard {
               land.y + land.height / 2
             );
             window.gameData.land[rowNumber - 1][colNumber - 1] = land;
-            window.gameData.sun -= 175;
+            window.gameData.sun -= 150;
             window.stage
               .getChildByName("uiContainer")
               .getChildByName("sunNumber").text = window.gameData.sun;
@@ -706,7 +706,7 @@ class PeaShooterCard {
                   window.stage
                     .getChildByName("uiContainer")
                     .removeChild(timeText);
-                  if (window.gameData.sun >= 175) {
+                  if (window.gameData.sun >= 150) {
                     window.stage
                       .getChildByName("uiContainer")
                       .getChildByName("RepeaterCard")

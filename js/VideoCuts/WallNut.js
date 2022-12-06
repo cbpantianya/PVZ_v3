@@ -1,6 +1,6 @@
 class WallNut {
   constructor(x, y) {
-    this.blood = 50;
+    this.blood = 70;
     this.waitBlood = 0;
 
     this.__init__(x, y);

@@ -2,7 +2,7 @@ import { PB1 } from "./PB1.js";
 class GatlingPea {
   constructor(x, y) {
     this.__init__(x, y);
-    this.blood = 6;
+    this.blood = 9;
     this.waitBlood = 0;
   }
 
@@ -100,14 +100,14 @@ class GatlingPeaCard {
     this.card = card;
 
     // 添加需要的太阳数量
-    var text = new createjs.Text("100", "16px Arial", "#000000");
+    var text = new createjs.Text("250", "16px Arial", "#000000");
     text.x = x + 65;
     text.y = y + 45;
     window.stage.getChildByName("plantContainer").addChild(text);
   }
 
   tick() {
-    if (window.gameData.sun >= 100 && this.waitTime <= 0) {
+    if (window.gameData.sun >= 250 && this.waitTime <= 0) {
       window.stage
         .getChildByName("uiContainer")
         .getChildByName("GatlingPeaCard")
@@ -116,7 +116,7 @@ class GatlingPeaCard {
         .getChildByName("uiContainer")
         .getChildByName("GatlingPeaCard").alpha = 1;
     } else {
-      if (window.gameData.sun < 100) {
+      if (window.gameData.sun < 250) {
         window.stage
           .getChildByName("uiContainer")
           .getChildByName("GatlingPeaCard")
@@ -265,7 +265,7 @@ class GatlingPeaCard {
       }
     }
 
-    window.gameData.sun -= 100;
+    window.gameData.sun -= 250;
     window.stage
       .getChildByName("uiContainer")
       .getChildByName("sunNumber").text = window.gameData.sun;
@@ -295,7 +295,7 @@ class GatlingPeaCard {
         if (time == 0) {
           clearInterval(timer);
           window.stage.getChildByName("uiContainer").removeChild(timeText);
-          if (window.gameData.sun >= 100) {
+          if (window.gameData.sun >= 250) {
             window.stage
               .getChildByName("uiContainer")
               .getChildByName("GatlingPeaCard")

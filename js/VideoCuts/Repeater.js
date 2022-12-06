@@ -3,7 +3,7 @@ import { PB1 } from "./PB1.js";
 class Repeater {
   constructor(x, y) {
     this.__init__(x, y);
-    this.blood = 6;
+    this.blood = 9;
     this.waitBlood = 0;
   }
 
@@ -102,14 +102,14 @@ class RepeaterCard {
     this.card = card;
 
     // 添加需要的太阳数量
-    var text = new createjs.Text("100", "16px Arial", "#000000");
+    var text = new createjs.Text("200", "16px Arial", "#000000");
     text.x = x + 65;
     text.y = y + 45;
     window.stage.getChildByName("plantContainer").addChild(text);
   }
 
   tick() {
-    if (window.gameData.sun >= 100 && this.waitTime <= 0) {
+    if (window.gameData.sun >= 200 && this.waitTime <= 0) {
       window.stage
         .getChildByName("uiContainer")
         .getChildByName("RepeaterCard")
@@ -118,7 +118,7 @@ class RepeaterCard {
         .getChildByName("uiContainer")
         .getChildByName("RepeaterCard").alpha = 1;
     } else {
-      if (window.gameData.sun < 100) {
+      if (window.gameData.sun < 200) {
         window.stage
           .getChildByName("uiContainer")
           .getChildByName("RepeaterCard")
@@ -264,7 +264,7 @@ class RepeaterCard {
       }
     }
 
-    window.gameData.sun -= 100;
+    window.gameData.sun -= 200;
     window.stage
       .getChildByName("uiContainer")
       .getChildByName("sunNumber").text = window.gameData.sun;
@@ -294,7 +294,7 @@ class RepeaterCard {
         if (time == 0) {
           clearInterval(timer);
           window.stage.getChildByName("uiContainer").removeChild(timeText);
-          if (window.gameData.sun >= 100) {
+          if (window.gameData.sun >= 200) {
             window.stage
               .getChildByName("uiContainer")
               .getChildByName("RepeaterCard")
