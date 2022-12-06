@@ -50,7 +50,18 @@ function loadAssets() {
     { src: "../assets/imgs/Shovel.png", id: "Shovel" },
     { src: "../assets/imgs/ShovelBack.png", id: "ShovelBack" },
     { src: "../assets/imgs/Cards/TwinSunflower.png", id: "TwinSunflowerCard" },
-    { src: "../assets/imgs/Plants/TwinSunflower/TwinSunflower.png", id: "TwinSunflower" },
+    {
+      src: "../assets/imgs/Plants/TwinSunflower/TwinSunflower.png",
+      id: "TwinSunflower",
+    },
+    {
+      src: "../assets/imgs/Plants/GatlingPea/GatlingPea.png",
+      id: "GatlingPea",
+    },
+    {
+      src: "../assets/imgs/Cards/GatlingPea.png",
+      id: "GatlingPeaCard",
+    },
   ];
   var loader = new createjs.LoadQueue();
   loader.loadManifest(manifest);

@@ -5,8 +5,8 @@ class Shovel {
 
   __init__(x, y) {
     this.shovel = new createjs.Bitmap(window.loader.getResult("Shovel"));
-    this.shovel.x = 800;
-    this.shovel.y = 0;
+    this.shovel.x = 20;
+    this.shovel.y = 50;
     this.shovel.name = "Shovel";
     this.shovel.regX = 30;
     this.shovel.regY = 10;
@@ -62,8 +62,8 @@ class ShovelCard {
 
   __init__(x, y) {
     var shovel = new createjs.Bitmap(window.loader.getResult("Shovel"));
-    shovel.x = 800;
-    shovel.y = 0;
+    shovel.x = 20;
+    shovel.y = 50;
     shovel.name = "Shovel";
     shovel.regX = 0;
     shovel.regY = 0;

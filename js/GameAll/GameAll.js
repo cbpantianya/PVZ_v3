@@ -8,6 +8,7 @@ import { WallNutCard } from "../VideoCuts/WallNut.js";
 import { Car } from "../VideoCuts/Car.js";
 import { ShovelCard } from "../VideoCuts/Shovel.js";
 import { TwinSunflowerCard } from "../VideoCuts/TwinSunflower.js";
+import { GatlingPeaCard } from "../VideoCuts/GatlingPea.js";
 
 class GameAll {
   constructor() {
@@ -68,15 +69,24 @@ class GameAll {
     // 添加Card
     var peaShooterCard = new PeaShooterCard(130, 0);
     var sunBoard = new SunBoard(0, 0);
-    var sunFlowerCard = new SunFlowerCard(250, 0);
-    var cherryBombCard = new CherryBombCard(370, 0);
-    var wallNutCard = new WallNutCard(490, 0);
-    var twinSunflowerCard = new TwinSunflowerCard(610, 0);
+    var sunFlowerCard = new SunFlowerCard(230, 0);
+    var cherryBombCard = new CherryBombCard(330, 0);
+    var wallNutCard = new WallNutCard(430, 0);
+    var twinSunflowerCard = new TwinSunflowerCard(530, 0);
+    var gatlingPeaCard = new GatlingPeaCard(630, 0);
     new Car(100, 120);
     new Car(100, 220);
     new Car(100, 320);
     new Car(100, 420);
     new Car(100, 520);
+    // 添加铲子的底图
+    var shovelBG = new createjs.Bitmap(window.loader.getResult("ShovelBack"));
+    shovelBG.x = 0;
+    shovelBG.y = 35;
+    // 缩放
+    shovelBG.scaleX = 1.8;
+    shovelBG.scaleY = 1.8;
+    uiContainer.addChild(shovelBG);
 
     var shovel = new ShovelCard();
 
