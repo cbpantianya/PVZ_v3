@@ -35,9 +35,9 @@ class Shovel {
         console.log(window.gameData.land[i][j]);
         if (
           this.shovel.x > window.gameData.land[i][j].x + 10 &&
-          this.shovel.x < window.gameData.land[i][j].x + 50 &&
+          this.shovel.x < window.gameData.land[i][j].x + 60 &&
           this.shovel.y > window.gameData.land[i][j].y &&
-          this.shovel.y < window.gameData.land[i][j].y + 40
+          this.shovel.y < window.gameData.land[i][j].y + 50
         ) {
           if (window.gameData.land[i][j].plant != null) {
             console.log("铲子点击了植物");

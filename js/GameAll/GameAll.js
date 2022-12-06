@@ -6,6 +6,8 @@ import { SunFlowerCard } from "../VideoCuts/SunFlower.js";
 import { CherryBombCard } from "../VideoCuts/CherryBomb.js";
 import { WallNutCard } from "../VideoCuts/WallNut.js";
 import { Car } from "../VideoCuts/Car.js";
+import { ShovelCard } from "../VideoCuts/Shovel.js";
+import { TwinSunflowerCard } from "../VideoCuts/TwinSunflower.js";
 
 class GameAll {
   constructor() {
@@ -69,11 +71,14 @@ class GameAll {
     var sunFlowerCard = new SunFlowerCard(250, 0);
     var cherryBombCard = new CherryBombCard(370, 0);
     var wallNutCard = new WallNutCard(490, 0);
+    var twinSunflowerCard = new TwinSunflowerCard(610, 0);
     new Car(100, 120);
     new Car(100, 220);
     new Car(100, 320);
     new Car(100, 420);
     new Car(100, 520);
+
+    var shovel = new ShovelCard();
 
     // 等待5秒后，僵尸开始行动
     setTimeout(() => {

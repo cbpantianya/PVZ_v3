@@ -49,7 +49,7 @@ class GameChoose {
     // 移除所有事件
     e.target.removeAllEventListeners();
     // 跳转场景
-    new Game001();
+    new GameAll();
   }
 }
 

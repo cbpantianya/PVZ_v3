@@ -20,7 +20,6 @@ function loadAssets() {
     { src: "../assets/imgs/Zombies/Zombie/ZombieWalk1.png", id: "ZombieWalk" },
     { src: "../assets/imgs/Zombies/Zombie/ZombieDie.png", id: "ZombieDie" },
     { src: "../assets/imgs/Cards/PeaShooter.png", id: "PeaShooterCard" },
-    { src: "../assets/imgs/Cards/PeaShooterG.png", id: "PeaShooterCardG" },
     {
       src: "../assets/imgs/Plants/PeaShooter/PeaShooter.png",
       id: "PeaShooter",
@@ -50,6 +49,8 @@ function loadAssets() {
     { src: "../assets/sounds/MainBGM.mp3", id: "MainBGM" },
     { src: "../assets/imgs/Shovel.png", id: "Shovel" },
     { src: "../assets/imgs/ShovelBack.png", id: "ShovelBack" },
+    { src: "../assets/imgs/Cards/TwinSunflower.png", id: "TwinSunflowerCard" },
+    { src: "../assets/imgs/Plants/TwinSunflower/TwinSunflower.png", id: "TwinSunflower" },
   ];
   var loader = new createjs.LoadQueue();
   loader.loadManifest(manifest);
