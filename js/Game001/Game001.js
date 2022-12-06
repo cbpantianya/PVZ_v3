@@ -10,11 +10,23 @@ import { ShovelCard } from "../VideoCuts/Shovel.js";
 class Game001 {
   constructor() {
     this.zombieList = []; // 僵尸驻场列表
-
     this.__init__();
   }
 
   __init__() {
+
+
+    document.body.removeChild(document.getElementById("co-list"));
+
+    var div = document.createElement("div");
+    var subdiv = document.createElement("div");
+    subdiv.innerHTML = "<div>在第3行第n列种植豌豆射手</div><div>例如:在第3行第4列种植豌豆射手</div>";
+    div.appendChild(subdiv);
+    div.id = "co-list";
+    document.body.appendChild(div);
+
+
+
     window.gameStep = 1;
     // 清除三容器
     var bgContainer = window.stage.getChildByName("bgContainer");

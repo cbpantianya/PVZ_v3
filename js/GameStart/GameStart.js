@@ -5,6 +5,14 @@ class GameStart {
   }
 
   __init__() {
+
+    var div = document.createElement("div");
+    var subdiv = document.createElement("div");
+    subdiv.innerHTML = "开始游戏";
+    div.appendChild(subdiv);
+    div.id = "co-list";
+    document.body.appendChild(div);
+
     // 清空背景
     var bgContainer = window.stage.getChildByName("bgContainer");
     bgContainer.removeAllChildren();

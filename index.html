@@ -52,13 +52,13 @@
             line-height: 60px;
         }
 
-        .desc{
+        .desc {
             position: absolute;
             top: 20%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 100%;
-            height: 60px;
+            height: 30px;
             background-color: #00000000;
             color: #fff;
             font-size: 20px;
@@ -72,8 +72,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-
         }
+
     </style>
 </head>
 
@@ -82,18 +82,20 @@
     <div id="main-mask">
         <div class="title">声控版植物大战僵尸</div>
         <div class="desc">
-            <p>请务必使用Chorme浏览器，并按照以下提示操作</p>
-            <p>请允许麦克风权限，并在chrome://flags/#unsafely-treat-insecure-origin-as-secure中添加运行该游戏的网址</p>
-            <p>然后重启浏览器，并重新打开此项目</p>
-            <p>此操作是为了程序能够在非HTTPS的条件下读取到麦克风</p>
+            <div>请务必使用Chorme浏览器，并按照以下提示操作</div>
+            <div>请允许麦克风权限，并在chrome://flags/#unsafely-treat-insecure-origin-as-secure中添加运行该游戏的网址</div>
+            <div>然后重启浏览器，并重新打开此项目</div>
+            <div>此操作是为了程序能够在非HTTPS的条件下读取到麦克风</div>
         </div>
         <div id="start-button">进入游戏</div>
     </div>
     <div>当前识别到的命令:</div>
     <div id="speech">您没有说话或没有按照步骤授予麦克风权限</div>
     <div>无法识别请尝试点下方按钮</div>
-    <div style="background-color:#333333;color:#ffffff;width:20%;cursor: pointer;" onclick=window.speech.start()>重新激活音频服务</div>
-    <div>语音交互的同时也可以通过鼠标操作</div>
+    <div style="background-color:#333333;color:#ffffff;width:20%;cursor: pointer;" onclick=window.speech.start()>
+        重新激活音频服务</div>
+    <div>既可以通过语音交互也可以通过鼠标交互</div>
+    <div style="margin-top:20px">当前页面支持的指令：</div>
 </body>
 <script src="./js/App.js" type="module"></script>
 

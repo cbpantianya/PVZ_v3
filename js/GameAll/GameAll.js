@@ -19,6 +19,27 @@ class GameAll {
   }
 
   __init__() {
+
+    document.body.removeChild(document.getElementById("co-list"));
+
+    var div = document.createElement("div");
+    var subdiv = document.createElement("div");
+    var list = [
+      "在第m行第n列种植****",
+      "1<=m<=5且1<=n<=9",
+      "****为植物名称",
+      "植物名称：豌豆射手/向日葵/樱桃炸弹",
+      "坚果墙/双向日葵/高射豌豆/双发射手",
+      "______________________________",
+      "在第m行第n列移除植物",
+    ]
+    list.forEach((item) => {
+      subdiv.innerHTML += `<div>${item}</div>`;
+    })
+    div.appendChild(subdiv);
+    div.id = "co-list";
+    document.body.appendChild(div);
+
     window.gameStep = 2;
     window.stage.removeChild(window.stage.getChildByName("black"));
     window.stage.removeChild(window.stage.getChildByName("text"));

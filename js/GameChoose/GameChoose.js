@@ -7,6 +7,15 @@ class GameChoose {
   }
 
   __init__() {
+
+    document.body.removeChild(document.getElementById("co-list"));
+
+    var div = document.createElement("div");
+    var subdiv = document.createElement("div");
+    subdiv.innerHTML = "开始冒险";
+    div.appendChild(subdiv);
+    div.id = "co-list";
+    document.body.appendChild(div);
     // 清空三容器
     var bgContainer = window.stage.getChildByName("bgContainer");
     bgContainer.removeAllChildren();
