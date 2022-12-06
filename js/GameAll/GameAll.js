@@ -121,7 +121,7 @@ class GameAll {
     });
 
     // 生成太阳
-    if (Math.random() < 0.01) {
+    if (Math.random() < 0.0001) {
       window.gameData.sunOnland++;
       new Sun(Math.random() * 600, 0);
     }

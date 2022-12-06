@@ -47,6 +47,10 @@ class GameStart {
     startGameText.addEventListener("mouseout", function (e) {
       e.target.color = "#ffffff";
     });
+
+    
+
+  
   }
 
   __startGame__() {

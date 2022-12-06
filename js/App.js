@@ -2,6 +2,7 @@ import { GameData } from "./Storage/Storage.js";
 import { GameStart } from "./GameStart/GameStart.js";
 import { GameChoose } from "./GameChoose/GameChoose.js";
 import { GameAll } from "./GameAll/GameAll.js";
+import { Game001 } from "./Game001/Game001.js";
 
 function loadAssets() {
   var manifest = [
@@ -46,6 +47,7 @@ function loadAssets() {
     { src: "../assets/imgs/Plants/WallNut/WallNut1.png", id: "WallNut1" },
     { src: "../assets/imgs/Plants/WallNut/WallNut2.png", id: "WallNut2" },
     { src: "../assets/imgs/LawnMower.gif", id: "LawnMower" },
+    { src: "../assets/sounds/MainBGM.mp3", id: "MainBGM" },
   ];
   var loader = new createjs.LoadQueue();
   loader.loadManifest(manifest);
@@ -95,6 +97,8 @@ function main() {
     // 获取最后一句话
     var last = event.results.length - 1;
     var lastTranscript = event.results[last][0].transcript;
+    var speech = document.getElementById("speech");
+    speech.innerHTML = lastTranscript;
     // 如果语句结束
     if (event.results[last].isFinal) {
       if (lastTranscript == "开始游戏") {
@@ -102,16 +106,29 @@ function main() {
       } else if (lastTranscript == "返回") {
         new GameStart();
       } else if (lastTranscript == "开始冒险") {
-        new GameAll();
+        new Game001();
         speechRecognition.stop();
       }
     }
   };
 
+  window.speech = speechRecognition;
+
   return;
 }
 
 function handleComplete() {
+  var startGameButton = document.getElementById("start-button");
+  startGameButton.onclick = function () {
+    var mainBGM = window.loader.getResult("MainBGM");
+    mainBGM.loop = true;
+    mainBGM.volume = 0.5;
+    mainBGM.play();
+
+    // 移除main-mask
+    var mainMask = document.getElementById("main-mask");
+    mainMask.remove();
+  };
   main();
 }
 

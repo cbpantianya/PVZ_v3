@@ -7,7 +7,6 @@ class PeaShooter {
     this.__init__(x, y);
     this.blood = 6;
     this.waitBlood = 0;
-
   }
 
   __init__(x, y) {
@@ -61,7 +60,9 @@ class PeaShooter {
       this.peaShooter.alpha = 0.5;
       // 移除监听并销毁自己
       this.peaShooter.removeEventListener("tick", this.tick.bind(this));
-      window.stage.getChildByName("plantContainer").removeChild(this.peaShooter);
+      window.stage
+        .getChildByName("plantContainer")
+        .removeChild(this.peaShooter);
       window.gameData.land.forEach((e) => {
         e.forEach((e) => {
           if (e.plant == this) {
@@ -92,10 +93,13 @@ class PeaShooterCard {
     speechRecognition.lang = "cmn-Hans-CN";
     speechRecognition.start();
     speechRecognition.onresult = function (event) {
+      // 保持监听
       // 输出最后一句话
       var last = event.results.length - 1;
       var lastTranscript = event.results[last][0].transcript;
-      if (event.results[last].isFinal) {
+      if (true) {
+        var speech = document.getElementById("speech");
+        speech.innerHTML = lastTranscript;
         // 正则表达式
         const req =
           /在第[一二三四五12345]+行第[一二三四五六七八九123456789]+列[\u4e00-\u9fa5]+豌豆射手/;
@@ -111,7 +115,11 @@ class PeaShooterCard {
           // 找到对应的土地
           const land = window.gameData.land[rowNumber - 1][colNumber - 1];
           // 判断土地是否为空
-          if (land.plant == null) {
+          if (
+            land.plant == null &&
+            window.gameData.sun >= 100 &&
+            land.type == 1
+          ) {
             // 种植
             land.plant = new PeaShooter(
               land.x + land.width / 2,
@@ -252,20 +260,23 @@ class PeaShooterCard {
           window.gameData.sunOnland = 0;
           while (
             window.stage
-              .getChildByName("plantContainer")
+              .getChildByName("gameContainer")
               .getChildByName("sun") != null
           ) {
+            // 销毁太阳
             window.stage
-              .getChildByName("plantContainer")
+              .getChildByName("gameContainer")
               .removeChild(
                 window.stage
-                  .getChildByName("plantContainer")
+                  .getChildByName("gameContainer")
                   .getChildByName("sun")
               );
           }
         }
       }
     }.bind(this);
+
+    window.speech = speechRecognition;
   }
 
   __init__(x, y) {
@@ -290,6 +301,9 @@ class PeaShooterCard {
   }
 
   tick() {
+    // 保持语音识别始终运行
+    console.log(window.speech);
+
     if (window.gameData.sun >= 100 && this.waitTime <= 0) {
       window.stage
         .getChildByName("uiContainer")

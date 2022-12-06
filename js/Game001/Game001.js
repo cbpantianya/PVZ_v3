@@ -180,7 +180,7 @@ class Game001 {
       //黑屏一下
       console.log("游戏结束");
       var black = new createjs.Shape();
-      black.graphics.beginFill("#000").drawRect(0, 0, 750, 750);
+      black.graphics.beginFill("#000").drawRect(0, 0, 950, 750);
       black.name = "black";
       black.alpha = 0;
       stage.addChild(black);
@@ -235,7 +235,7 @@ class Game001 {
     });
 
     // 生成太阳
-    if (Math.random() < 0.01) {
+    if (Math.random() < 0.005) {
       window.gameData.sunOnland++;
       new Sun(Math.random() * 600, 0);
     }
