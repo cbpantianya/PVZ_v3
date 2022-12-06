@@ -62,6 +62,14 @@ function loadAssets() {
       src: "../assets/imgs/Cards/GatlingPea.png",
       id: "GatlingPeaCard",
     },
+    {
+      src: "../assets/imgs/Plants/Repeater/Repeater.png",
+      id: "Repeater",
+    },
+    {
+      src: "../assets/imgs/Cards/Repeater.png",
+      id: "RepeaterCard",
+    },
   ];
   var loader = new createjs.LoadQueue();
   loader.loadManifest(manifest);

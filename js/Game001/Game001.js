@@ -6,6 +6,7 @@ import { Car } from "../VideoCuts/Car.js";
 import { GameAll } from "../GameAll/GameAll.js";
 import { ShovelCard } from "../VideoCuts/Shovel.js";
 
+
 class Game001 {
   constructor() {
     this.zombieList = []; // 僵尸驻场列表

@@ -9,6 +9,7 @@ import { Car } from "../VideoCuts/Car.js";
 import { ShovelCard } from "../VideoCuts/Shovel.js";
 import { TwinSunflowerCard } from "../VideoCuts/TwinSunflower.js";
 import { GatlingPeaCard } from "../VideoCuts/GatlingPea.js";
+import { RepeaterCard } from "../VideoCuts/Repeater.js";
 
 class GameAll {
   constructor() {
@@ -74,6 +75,7 @@ class GameAll {
     var wallNutCard = new WallNutCard(430, 0);
     var twinSunflowerCard = new TwinSunflowerCard(530, 0);
     var gatlingPeaCard = new GatlingPeaCard(630, 0);
+    var repeaterCard = new RepeaterCard(730, 0);
     new Car(100, 120);
     new Car(100, 220);
     new Car(100, 320);
