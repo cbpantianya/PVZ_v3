@@ -55,8 +55,37 @@ class GameChoose {
     e.target.gotoAndPlay("blink");
     // 移除所有事件
     e.target.removeAllEventListeners();
+    
     // 跳转场景
-    new Game001();
+    var black = new createjs.Shape();
+      black.graphics.beginFill("#000").drawRect(0, 0, 950, 750);
+      black.name = "black";
+      black.alpha = 0;
+      stage.addChild(black);
+      // 文字
+      var text = new createjs.Text(
+        "第一关",
+        "bold 50px Arial",
+        "#fff"
+      );
+      text.x = 300;
+      text.y = 300;
+      text.name = "text";
+      text.alpha = 0;
+      stage.addChild(text);
+      createjs.Tween.get(black)
+        .wait(3000)
+        .to({ alpha: 1 }, 1000)
+        .wait(3000)
+        .call(function () {
+          new Game001();
+        })
+        createjs.Tween.get(text)
+        .wait(3000)
+        .to({ alpha: 1 }, 1000)
+        .wait(3000)
+
+    
   }
 }
 

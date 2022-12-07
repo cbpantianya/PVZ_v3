@@ -80,7 +80,7 @@ class SunBoard {
     window.stage.getChildByName("uiContainer").addChild(sunBoard);
 
     // 添加文字
-    var text = new createjs.Text("3000", "20px Arial", "#000000");
+    var text = new createjs.Text("30000", "20px Arial", "#000000");
     text.x = 60;
     text.y = 10;
     text.name = "sunNumber";

@@ -115,13 +115,16 @@ class SunFlowerCard {
 
   tick() {
     if (window.gameData.sun >= 50 && this.waitTime <= 0) {
-      window.stage
-        .getChildByName("uiContainer")
-        .getChildByName("SunFlowerCard")
-        .addEventListener("click", this.click.bind(this));
-      window.stage
-        .getChildByName("uiContainer")
-        .getChildByName("SunFlowerCard").alpha = 1;
+      if (this.binded == false) {
+        this.binded = true;
+        window.stage
+          .getChildByName("uiContainer")
+          .getChildByName("SunFlowerCard")
+          .addEventListener("click", this.click.bind(this));
+        window.stage
+          .getChildByName("uiContainer")
+          .getChildByName("SunFlowerCard").alpha = 1;
+      }
     } else {
       if (window.gameData.sun < 50) {
         window.stage
@@ -284,6 +287,7 @@ class SunFlowerCard {
       .getChildByName("uiContainer")
       .getChildByName("SunFlowerCard")
       .removeAllEventListeners();
+    this.binded = false;
     window.stage
       .getChildByName("uiContainer")
       .getChildByName("SunFlowerCard")
@@ -310,6 +314,7 @@ class SunFlowerCard {
               .getChildByName("uiContainer")
               .getChildByName("SunFlowerCard")
               .addEventListener("click", this.click.bind(this));
+            this.binded = true;
             window.stage
               .getChildByName("uiContainer")
               .getChildByName("SunFlowerCard").alpha = 1;

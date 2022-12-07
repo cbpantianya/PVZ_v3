@@ -110,13 +110,16 @@ class RepeaterCard {
 
   tick() {
     if (window.gameData.sun >= 200 && this.waitTime <= 0) {
-      window.stage
-        .getChildByName("uiContainer")
-        .getChildByName("RepeaterCard")
-        .addEventListener("click", this.click.bind(this));
-      window.stage
-        .getChildByName("uiContainer")
-        .getChildByName("RepeaterCard").alpha = 1;
+      if (this.binded == false) {
+        this.binded = true;
+        window.stage
+          .getChildByName("uiContainer")
+          .getChildByName("RepeaterCard")
+          .addEventListener("click", this.click.bind(this));
+        window.stage
+          .getChildByName("uiContainer")
+          .getChildByName("RepeaterCard").alpha = 1;
+      }
     } else {
       if (window.gameData.sun < 200) {
         window.stage
@@ -131,6 +134,7 @@ class RepeaterCard {
   }
 
   click(e) {
+    console.log("RepeaterCard click");
     if (this.__plantInHand__) {
       // 删除射手
       window.stage
@@ -273,10 +277,13 @@ class RepeaterCard {
       .getChildByName("uiContainer")
       .getChildByName("RepeaterCard")
       .removeAllEventListeners();
+    this.binded = false;
+
     window.stage
       .getChildByName("uiContainer")
       .getChildByName("RepeaterCard")
       .addEventListener("tick", this.tick.bind(this));
+    this.binded = false;
     window.stage
       .getChildByName("uiContainer")
       .getChildByName("RepeaterCard").alpha = 0.5;
@@ -299,6 +306,11 @@ class RepeaterCard {
               .getChildByName("uiContainer")
               .getChildByName("RepeaterCard")
               .addEventListener("click", this.click.bind(this));
+            window.stage
+              .getChildByName("uiContainer")
+              .getChildByName("RepeaterCard")
+              .addEventListener("tick", this.tick.bind(this));
+            this.binded = true;
             window.stage
               .getChildByName("uiContainer")
               .getChildByName("RepeaterCard").alpha = 1;

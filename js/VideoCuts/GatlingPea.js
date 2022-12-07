@@ -4,6 +4,7 @@ class GatlingPea {
     this.__init__(x, y);
     this.blood = 9;
     this.waitBlood = 0;
+    this.binded = false;
   }
 
   __init__(x, y) {
@@ -108,13 +109,16 @@ class GatlingPeaCard {
 
   tick() {
     if (window.gameData.sun >= 250 && this.waitTime <= 0) {
-      window.stage
-        .getChildByName("uiContainer")
-        .getChildByName("GatlingPeaCard")
-        .addEventListener("click", this.click.bind(this));
-      window.stage
-        .getChildByName("uiContainer")
-        .getChildByName("GatlingPeaCard").alpha = 1;
+      if (this.binded == false) {
+        this.binded = true;
+        window.stage
+          .getChildByName("uiContainer")
+          .getChildByName("GatlingPeaCard")
+          .addEventListener("click", this.click.bind(this));
+        window.stage
+          .getChildByName("uiContainer")
+          .getChildByName("GatlingPeaCard").alpha = 1;
+      }
     } else {
       if (window.gameData.sun < 250) {
         window.stage
@@ -274,6 +278,7 @@ class GatlingPeaCard {
       .getChildByName("uiContainer")
       .getChildByName("GatlingPeaCard")
       .removeAllEventListeners();
+    this.binded = false;
     window.stage
       .getChildByName("uiContainer")
       .getChildByName("GatlingPeaCard")
@@ -300,9 +305,16 @@ class GatlingPeaCard {
               .getChildByName("uiContainer")
               .getChildByName("GatlingPeaCard")
               .addEventListener("click", this.click.bind(this));
+            this.binded = true;
+            window.stage
+              .getChildByName("uiContainer")
+              .getChildByName("GatlingPeaCard")
+              .addEventListener("tick", this.tick.bind(this));
             window.stage
               .getChildByName("uiContainer")
               .getChildByName("GatlingPeaCard").alpha = 1;
+          }else{
+            this.binded == false
           }
           this.waitTime = 0;
         }

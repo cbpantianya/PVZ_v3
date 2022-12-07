@@ -82,7 +82,7 @@ function main() {
 
   // 获取容器并初始化舞台
   window.stage = new createjs.Stage(canvas);
-  stage.enableMouseOver(20);
+  stage.enableMouseOver(50);
 
   // 新建容器，用于处理背景图片
   var bgContainer = new createjs.Container();

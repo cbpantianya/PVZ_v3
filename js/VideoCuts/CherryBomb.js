@@ -2,7 +2,6 @@ class CherryBomb {
   constructor(x, y) {
     this.blood = 9;
     this.waitBlood = 0;
-
     this.__init__(x, y);
   }
 
@@ -134,13 +133,17 @@ class CherryBombCard {
 
   tick() {
     if (window.gameData.sun >= 150 && this.waitTime <= 0) {
-      window.stage
+      if(this.binded == false){
+        this.binded = true;
+        window.stage
         .getChildByName("uiContainer")
         .getChildByName("CherryBombCard")
         .addEventListener("click", this.click.bind(this));
       window.stage
         .getChildByName("uiContainer")
         .getChildByName("CherryBombCard").alpha = 1;
+      }
+      
     } else {
       if (window.gameData.sun < 150) {
         window.stage
@@ -305,6 +308,7 @@ class CherryBombCard {
       .getChildByName("uiContainer")
       .getChildByName("CherryBombCard")
       .removeAllEventListeners();
+      this.binded = false;
     window.stage
       .getChildByName("uiContainer")
       .getChildByName("CherryBombCard")
@@ -331,6 +335,7 @@ class CherryBombCard {
               .getChildByName("uiContainer")
               .getChildByName("CherryBombCard")
               .addEventListener("click", this.click.bind(this));
+              this.binded = true;
             window.stage
               .getChildByName("uiContainer")
               .getChildByName("CherryBombCard").alpha = 1;

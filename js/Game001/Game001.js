@@ -13,6 +13,8 @@ class Game001 {
   }
 
   __init__() {
+    window.stage.removeChild(window.stage.getChildByName("black"));
+    window.stage.removeChild(window.stage.getChildByName("text"));
     document.body.removeChild(document.getElementById("co-list"));
 
     var div = document.createElement("div");
@@ -23,7 +25,7 @@ class Game001 {
     div.id = "co-list";
     document.body.appendChild(div);
 
-    document.getElementById("steps").innerHTML = "当前关卡第1关,总共2关";
+    document.getElementById("steps").innerHTML = "当前关卡第1关,总共2关,下一关植物更多";
 
     window.gameStep = 1;
     // 清除三容器
@@ -45,9 +47,9 @@ class Game001 {
     window.gameData = new GameData();
     window.gameData.generateLand(1);
 
-    // 弄3只假的僵尸
+    // 弄1只假的僵尸
     var fakeZombies = [];
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 1; i++) {
       fakeZombies.push(new Zombie(1200, 100 + i * 100));
     }
 

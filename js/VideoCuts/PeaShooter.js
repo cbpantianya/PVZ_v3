@@ -93,6 +93,7 @@ class PeaShooterCard {
     this.waitTime = 0;
     var speechRecognition = new webkitSpeechRecognition();
     this.SpecialTime = false; //防抖
+    this.binded = false;
 
     speechRecognition.continuous = true;
     speechRecognition.interimResults = true;
@@ -141,6 +142,7 @@ class PeaShooterCard {
               .getChildByName("uiContainer")
               .getChildByName("PeaShooterCard")
               .removeAllEventListeners();
+            this.binded = false;
             window.stage
               .getChildByName("uiContainer")
               .getChildByName("PeaShooterCard")
@@ -786,13 +788,16 @@ class PeaShooterCard {
     // 保持语音识别始终运行
 
     if (window.gameData.sun >= 100 && this.waitTime <= 0) {
-      window.stage
-        .getChildByName("uiContainer")
-        .getChildByName("PeaShooterCard")
-        .addEventListener("click", this.click.bind(this));
-      window.stage
-        .getChildByName("uiContainer")
-        .getChildByName("PeaShooterCard").alpha = 1;
+      if ((this.binded = false)) {
+        this.binded = true;
+        window.stage
+          .getChildByName("uiContainer")
+          .getChildByName("PeaShooterCard")
+          .addEventListener("click", this.click.bind(this));
+        window.stage
+          .getChildByName("uiContainer")
+          .getChildByName("PeaShooterCard").alpha = 1;
+      }
     } else {
       if (window.gameData.sun < 100) {
         window.stage
@@ -952,6 +957,7 @@ class PeaShooterCard {
       .getChildByName("uiContainer")
       .getChildByName("PeaShooterCard")
       .removeAllEventListeners();
+    this.binded = false;
     window.stage
       .getChildByName("uiContainer")
       .getChildByName("PeaShooterCard")

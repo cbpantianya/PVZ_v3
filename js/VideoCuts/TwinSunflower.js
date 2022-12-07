@@ -122,15 +122,19 @@ class TwinSunflowerCard {
 
   tick() {
     if (window.gameData.sun >= 150 && this.waitTime <= 0) {
-      window.stage
-        .getChildByName("uiContainer")
-        .getChildByName("TwinSunflowerCard")
-        .addEventListener("click", this.click.bind(this));
-      window.stage
-        .getChildByName("uiContainer")
-        .getChildByName("TwinSunflowerCard").alpha = 1;
+      if (this.binded == false) {
+        this.binded = true;
+        window.stage
+          .getChildByName("uiContainer")
+          .getChildByName("TwinSunflowerCard")
+          .addEventListener("click", this.click.bind(this));
+        window.stage
+          .getChildByName("uiContainer")
+          .getChildByName("TwinSunflowerCard").alpha = 1;
+      }
     } else {
       if (window.gameData.sun < 150) {
+        console.log("太阳不够");
         window.stage
           .getChildByName("uiContainer")
           .getChildByName("TwinSunflowerCard")
@@ -138,6 +142,12 @@ class TwinSunflowerCard {
         window.stage
           .getChildByName("uiContainer")
           .getChildByName("TwinSunflowerCard").alpha = 0.5;
+      } else {
+        if (this.waitTime <= 0) {
+          window.stage
+            .getChildByName("uiContainer")
+            .getChildByName("TwinSunflowerCard").alpha = 1;
+        }
       }
     }
   }
@@ -291,6 +301,7 @@ class TwinSunflowerCard {
       .getChildByName("uiContainer")
       .getChildByName("TwinSunflowerCard")
       .removeAllEventListeners();
+    this.binded = false;
     window.stage
       .getChildByName("uiContainer")
       .getChildByName("TwinSunflowerCard")
@@ -313,10 +324,16 @@ class TwinSunflowerCard {
           clearInterval(timer);
           window.stage.getChildByName("uiContainer").removeChild(timeText);
           if (window.gameData.sun >= 150) {
+            console.log("可以购买");
             window.stage
               .getChildByName("uiContainer")
               .getChildByName("TwinSunflowerCard")
               .addEventListener("click", this.click.bind(this));
+            this.binded = true;
+            window.stage
+              .getChildByName("uiContainer")
+              .getChildByName("TwinSunflowerCard")
+              .addEventListener("tick", this.tick.bind(this));
             window.stage
               .getChildByName("uiContainer")
               .getChildByName("TwinSunflowerCard").alpha = 1;

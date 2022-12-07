@@ -116,13 +116,16 @@ class WallNutCard {
 
   tick() {
     if (window.gameData.sun >= 50 && this.waitTime <= 0) {
-      window.stage
-        .getChildByName("uiContainer")
-        .getChildByName("WallNutCard")
-        .addEventListener("click", this.click.bind(this));
-      window.stage
-        .getChildByName("uiContainer")
-        .getChildByName("WallNutCard").alpha = 1;
+      if (this.binded == false) {
+        this.binded = true;
+        window.stage
+          .getChildByName("uiContainer")
+          .getChildByName("WallNutCard")
+          .addEventListener("click", this.click.bind(this));
+        window.stage
+          .getChildByName("uiContainer")
+          .getChildByName("WallNutCard").alpha = 1;
+      }
     } else {
       if (window.gameData.sun < 50) {
         window.stage
@@ -308,6 +311,11 @@ class WallNutCard {
               .getChildByName("uiContainer")
               .getChildByName("WallNutCard")
               .addEventListener("click", this.click.bind(this));
+            this.binded = true;
+            window.stage
+              .getChildByName("uiContainer")
+              .getChildByName("WallNutCard")
+              .addEventListener("tick", this.tick.bind(this));
             window.stage
               .getChildByName("uiContainer")
               .getChildByName("WallNutCard").alpha = 1;
