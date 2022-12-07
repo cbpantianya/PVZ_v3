@@ -626,8 +626,8 @@ class PeaShooterCard {
                       .getChildByName("GatlingPeaCard")
                       .addEventListener(
                         "click",
-                        window.gameData.cardList[4].click.bind(
-                          window.gameData.cardList[4]
+                        window.gameData.cardList[5].click.bind(
+                          window.gameData.cardList[5]
                         )
                       );
                     window.stage
@@ -714,8 +714,8 @@ class PeaShooterCard {
                       .getChildByName("RepeaterCard")
                       .addEventListener(
                         "click",
-                        window.gameData.cardList[5].click.bind(
-                          window.gameData.cardList[5]
+                        window.gameData.cardList[6].click.bind(
+                          window.gameData.cardList[6]
                         )
                       );
                     window.stage
